@@ -1,5 +1,6 @@
 @echo off
-REM KeePass Sync - Windows (calls Node.js)
+REM KeePass Sync - Windows wrapper (calls node sync.js)
+REM Copyright (c) 2026 Sunny C.
 cd /d "%~dp0\.."
 
 where node >nul 2>&1
