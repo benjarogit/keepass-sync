@@ -49,12 +49,12 @@ cp config.example.json config.json
 | Field | Meaning |
 |-------|---------|
 | `local.localPath` | Path to local .kdbx – same file as opened in KeePassXC. Absolute (e.g. `/path/to/keepass_passwords.kdbx`) or relative to project dir. |
-| `ftp.host` | Server (IP or hostname) |
+| `ftp.type` | `ftp`, `sftp`, `scp`, `smb`, or `rclone`/`gdrive` (recommended: rclone, else sftp) |
+| `ftp.host` | Server (IP or hostname) – not needed for rclone |
 | `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
-| `ftp.type` | `ftp`, `sftp`, `scp`, `smb`, or `rclone`/`gdrive` (Google Drive) |
 | `ftp.user` | Username |
 | `ftp.password` | Password |
-| `ftp.remotePath` | Full path to .kdbx on server |
+| `ftp.remotePath` | Full path to .kdbx – server path or rclone path (e.g. `gdrive:KeePass/keepass_passwords.kdbx`) |
 | `keepass.databasePassword` | KeePass master password |
 
 **Optional:** `KEEPASS_DB_PASSWORD` env var overrides the master password (safer than storing in config). `KEEPASS_LOCAL_PATH` overrides the path to the local KDBX.
@@ -84,37 +84,39 @@ Includes Cron syntax, Task Scheduler clicks, LaunchAgent setup, and install scri
 **Merge only – no overwrite.** Both sources are combined; local and remote entries are merged. Nothing is replaced blindly.
 
 1. **Backup** local database
-2. **Download** database from server (FTP/SFTP/SMB/SCP)
+2. **Download** database from remote (FTP/SFTP/SMB/SCP or Google Drive via rclone)
 3. **Validate** downloaded file (reject corrupt or incompatible KDBX)
 4. **Merge** with KeePassXC-CLI (`keepassxc-cli merge -s … --same-credentials`)
-5. **Upload** merged database back to server
+5. **Upload** merged database back to remote
 
-The server file stays current; open the same DB on mobile with the same FTP credentials.
+The remote file stays current. **Mobile:** With Google Drive, open the DB directly from Drive. With FTP/SFTP, use the same credentials in KeePass2Android.
 
 **If merge fails:** Neither local nor server file is modified. Backups in `backups/` remain unchanged.
 
+**When to sync:** After Desktop changes: run `keepass-sync --sync`. After smartphone changes: save in KeePass2Android first, then `keepass-sync --sync` on Desktop. In KeePass2Android: close and reopen DB to load sync changes.
+
 ---
 
-## Android: Externe Datenbank einrichten
+## Android: Adding External Database
 
-### Google Drive (empfohlen)
+### Google Drive (recommended)
 
-Bei `type: "rclone"` die Datenbank in KeePass2Android direkt aus **Google Drive** öffnen (eingebaute Unterstützung). Dieselbe Datei wie in `remotePath` wählen, z.B. im Ordner `KeePass/keepass_passwords.kdbx`. Keine FTP-Konfiguration nötig.
+With `type: "rclone"` open the database in KeePass2Android directly from **Google Drive** (built-in support). Choose the same file as in `remotePath`, e.g. folder `KeePass/keepass_passwords.kdbx`. No FTP configuration needed.
 
 ### FTP/SFTP
 
-In KeePass2Android, Strongbox oder ähnlichen Apps dieselben Werte wie in `config.json` nutzen: Host, Port, Benutzer, Passwort, Startverzeichnis. **SFTP vorziehen** (Passwörter verschlüsselt; weniger Kompatibilitätsprobleme als mit FTP).
+In KeePass2Android, Strongbox, etc. use the same values as in `config.json`: Host, Port, Username, Password, Start directory. **Prefer SFTP** (encryption; fewer compatibility issues than FTP).
 
-| App-Feld | Was eingeben |
-|----------|--------------|
+| App field | Enter |
+|-----------|-------|
 | **Host** | `ftp.host` |
-| **Port** | `21` (FTP) oder `22` (SFTP) |
-| **Verschlüsselung** | FTP oder SFTP (`ftp.type`) |
-| **Benutzername** | `ftp.user` |
-| **Passwort** | `ftp.password` |
-| **Startverzeichnis** | Verzeichnisteil von `ftp.remotePath` |
+| **Port** | 21 (FTP) or 22 (SFTP) |
+| **Encryption** | FTP or SFTP (`ftp.type`) |
+| **Username** | `ftp.user` |
+| **Password** | `ftp.password` |
+| **Start directory** | Directory part of `ftp.remotePath` |
 
-**Tipp:** Bei Problemen mit KeePass2Android und FTP: In KeePassXC auf KDBX 3.1 speichern. Mit Google Drive meist nicht nötig.
+**Tip:** If you have issues with KeePass2Android and FTP: In KeePassXC save as KDBX 3.1. Usually not needed with Google Drive.
 
 [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
 
@@ -143,11 +145,11 @@ npm run open-ftp
 
 ## FAQ
 
-**Do I need an FTP server?** Yes – you need FTP, SFTP, SMB, or SCP access to a server where the .kdbx file is stored.
+**Do I need an FTP server?** With Google Drive: no, use rclone. With FTP/SFTP/SMB/SCP: yes, you need server access where the .kdbx is stored.
 
-**How does merge work?** KeePassXC-CLI merges the downloaded file into your local copy; conflicting entries are combined. Both files use the same master password. **Merge only – no overwrite.** Both sources are combined; data is never replaced blindly.
+**How does merge work?** KeePassXC-CLI merges the downloaded file into your local copy; conflicting entries are combined. Both files use the same master password. **Merge only – no overwrite.** Data is never replaced blindly.
 
-**What if the merge fails?** Neither your local database nor the server file is modified. See Android section for compatibility tips (KDBX format, Google Drive vs FTP). Backups in `backups/` remain safe.
+**What if the merge fails?** Neither your local database nor the remote file is modified. See Android section for compatibility tips. Backups in `backups/` remain safe.
 
 **Does it work on Windows without WSL?** Yes. Node.js handles FTP/SFTP natively; no lftp or WSL needed.
 
