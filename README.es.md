@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/github/license/benjarogit/keepass-sync)](LICENSE)
 [![GitHub release](https://img.shields.io/github/v/release/benjarogit/keepass-sync)](https://github.com/benjarogit/keepass-sync/releases)
 
-**Sincroniza y fusiona tu base de datos KeePass/KeePassXC por FTP, SFTP, SMB o SCP.**
+**Sincroniza y fusiona tu base de datos KeePass/KeePassXC por FTP, SFTP, SMB, SCP o Google Drive (rclone).**
 
 Idiomas: [Deutsch](README.de.md) | [English](README.en.md) | [Español](README.es.md)
 
@@ -43,12 +43,12 @@ cp config.example.json config.json
 | Campo | Significado |
 |-------|-------------|
 | `local.localPath` | Ruta a la .kdbx local – el mismo archivo que en KeePassXC. Absoluta (ej. `/ruta/a/keepass_passwords.kdbx`) o relativa al directorio del proyecto. |
-| `ftp.host` | Servidor (IP o hostname) |
+| `ftp.type` | `ftp`, `sftp`, `scp`, `smb` o `rclone`/`gdrive` (recomendado: rclone, si no sftp) |
+| `ftp.host` | Servidor (IP o hostname) – no necesario para rclone |
 | `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
-| `ftp.type` | `ftp`, `sftp`, `scp`, `smb` o `rclone`/`gdrive` (Google Drive) |
 | `ftp.user` | Usuario |
 | `ftp.password` | Contraseña |
-| `ftp.remotePath` | Ruta completa al .kdbx en el servidor |
+| `ftp.remotePath` | Ruta completa al .kdbx – ruta en servidor o rclone (ej. `gdrive:KeePass/keepass_passwords.kdbx`) |
 | `keepass.databasePassword` | Contraseña maestra KeePass |
 
 **Opcional:** `KEEPASS_DB_PASSWORD` sustituye la contraseña maestra (más seguro que en config). `KEEPASS_LOCAL_PATH` sustituye la ruta a la KDBX local.
@@ -77,14 +77,16 @@ Guías completas: [DE](docs/INSTALL.de.md) · [EN](docs/INSTALL.en.md) · [ES](d
 **Solo merge – sin sobrescribir.** Ambas fuentes se combinan; entradas locales y remotas se fusionan. Nada se reemplaza a ciegas.
 
 1. Copia de seguridad de la DB local
-2. Descarga de la DB del servidor (FTP/SFTP/SMB/SCP)
+2. Descarga de la DB del remoto (FTP/SFTP/SMB/SCP o Google Drive vía rclone)
 3. Validación del archivo descargado (rechazo si KDBX corrupto o incompatible)
 4. Merge con KeePassXC-CLI (DB local + descargada)
-5. Subida de la DB fusionada al servidor
+5. Subida de la DB fusionada al remoto
 
-El archivo en el servidor se mantiene actualizado; en el móvil abre la misma DB por FTP/SFTP con las mismas credenciales.
+El archivo remoto se mantiene actualizado. **Móvil:** Con Google Drive, abre la DB directamente desde Drive. Con FTP/SFTP, usa las mismas credenciales en KeePass2Android.
 
-**Si falla el merge:** Ni el archivo local ni el del servidor se modifican. Las copias en `backups/` permanecen intactas.
+**Si falla el merge:** Ni el archivo local ni el del remoto se modifican. Las copias en `backups/` permanecen intactas.
+
+**Cuándo sincronizar:** Tras cambios en el escritorio: ejecuta `keepass-sync --sync`. Tras cambios en el móvil: guarda primero en KeePass2Android, luego `keepass-sync --sync` en el escritorio. En KeePass2Android: cierra y reabre la DB para cargar los cambios del sync.
 
 ---
 
@@ -129,7 +131,34 @@ npm run open-ftp
 
 ---
 
+## FAQ
+
+**¿Necesito un servidor FTP?** Con Google Drive: no, se usa rclone. Con FTP/SFTP/SMB/SCP: sí, necesitas acceso a un servidor donde esté la .kdbx.
+
+**¿Cómo funciona el merge?** KeePassXC-CLI fusiona el archivo descargado en tu copia local; las entradas conflictivas se combinan. Ambos archivos usan la misma contraseña maestra. **Solo merge – sin sobrescribir.** Los datos nunca se reemplazan a ciegas.
+
+**¿Qué pasa si falla el merge?** Ni tu base de datos local ni el archivo remoto se modifican. Consulta la sección Android para consejos de compatibilidad. Las copias en `backups/` siguen seguras.
+
+**¿Funciona en Windows sin WSL?** Sí. Node.js maneja FTP/SFTP de forma nativa; no hace falta lftp ni WSL.
+
+---
+
+## Desarrollo
+
+- **Ejecutar tests:** `npm test`
+- **Referencia KeePassXC:** submódulo `keepassxc/` – `git submodule update --init`
+
+---
+
+## Releases y versionado
+
+La versión en `package.json` y los tags de Git (ej. `v2.0.2`) están sincronizados. El paquete npm y los releases de GitHub coinciden.
+
+---
+
 ## Documentación
+
+[docs/](docs/README.md) – Instalación y automatización · Pruebas · Release-Workflow
 
 | Tema | DE | EN | ES |
 |------|----|----|-----|
