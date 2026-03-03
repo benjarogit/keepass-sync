@@ -40,12 +40,11 @@ The installer:
 - KeePassXC installed (with `keepassxc-cli`)
 - Node.js 18+ installed
 
-### Protocol-specific Requirements:
+### Protocol-specific Requirements (recommended: 1. Google Drive, 2. SFTP, 3. FTP)
 
-**FTP:**
-- FTP/SFTP: via Node.js – no extra tools
+**Google Drive (rclone):** Recommended – best mobile app compatibility. Before first sync: run `rclone config`.
 
-**SFTP:**
+**FTP/SFTP:** Via Node.js – no extra tools. Prefer SFTP (encryption; fewer Android issues).
 
 **SMB/CIFS:**
 - Linux/macOS: Install `smbclient`: `sudo pacman -S samba` or `sudo apt install samba-common`
@@ -611,12 +610,11 @@ The installer:
 - KeePassXC installed (with `keepassxc-cli`)
 - Node.js 18+ installed
 
-### Protocol-specific Requirements:
+### Protocol-specific Requirements (recommended: 1. Google Drive, 2. SFTP, 3. FTP)
 
-**FTP:**
-- FTP/SFTP: via Node.js – no extra tools
+**Google Drive (rclone):** Recommended – best mobile app compatibility. Before first sync: run `rclone config`.
 
-**SFTP:**
+**FTP/SFTP:** Via Node.js – no extra tools. Prefer SFTP (encryption; fewer Android issues).
 
 **SMB/CIFS:**
 - Linux/macOS: Install `smbclient`: `sudo pacman -S samba` or `sudo apt install samba-common`
