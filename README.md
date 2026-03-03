@@ -153,6 +153,8 @@ Version in `package.json` and Git tags (e.g. `v2.0.1`) stay in sync. npm package
 
 ## Documentation
 
+[docs/](docs/README.md) – Installation & Automation · Testing · Release-Workflow
+
 | Topic | DE | EN | ES |
 |-------|----|----|-----|
 | Installation & Automation | [INSTALL](docs/INSTALL.de.md) | [INSTALL](docs/INSTALL.en.md) | [INSTALL](docs/INSTALL.es.md) |
