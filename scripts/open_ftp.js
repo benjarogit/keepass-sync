@@ -37,7 +37,7 @@ async function listFTP() {
     if (dir !== '/') await client.cd(dir);
     const list = await client.list();
     console.log(`FTP ${host}:${port} ${dir}\n`);
-    list.forEach((e) => console.log(`${e.isDirectory ? 'd' : '-''} ${e.name}`));
+    list.forEach((e) => console.log(`${e.isDirectory ? 'd' : '-'} ${e.name}`));
   } catch (e) {
     console.error('FTP error:', e.message);
     process.exit(1);
@@ -54,7 +54,7 @@ async function listSFTP() {
     const dir = remoteDir && remoteDir !== '.' ? remoteDir : '.';
     const list = await sftp.list(dir);
     console.log(`SFTP ${host}:${port} ${dir}\n`);
-    list.forEach((e) => console.log(`${e.type === 'd' ? 'd' : '-''} ${e.name}`));
+    list.forEach((e) => console.log(`${e.type === 'd' ? 'd' : '-'} ${e.name}`));
   } catch (e) {
     console.error('SFTP error:', e.message);
     process.exit(1);
