@@ -17,6 +17,7 @@ Idiomas: [Deutsch](README.de.md) | [English](README.en.md) | [Español](README.e
 
 - Linux, Windows (incl. WSL2), macOS (x86_64)
 - **Node.js 18+** y **KeePassXC** (con `keepassxc-cli`) requeridos
+- **Recomendado:** Google Drive (rclone) para sincronización en la nube fiable y mejor compatibilidad con apps móviles – evita problemas FTP/SFTP con KeePass2Android
 
 ---
 
@@ -29,24 +30,28 @@ npm install -g keepass-sync
 # o desde source: git clone https://github.com/benjarogit/keepass-sync.git && cd keepass-sync && npm install
 ```
 
+**Configuración rápida:** Ejecuta `npm run setup` para configuración interactiva (recomendado para principiantes). Para Google Drive: `cp config.example.gdrive.json config.json`, luego ejecuta `rclone config`.
+
 ### 2. Configurar
 
 ```bash
 cp config.example.json config.json
+# Para Google Drive: cp config.example.gdrive.json config.json
 # Editar config.json – ver tabla abajo
 ```
 
 | Campo | Significado |
 |-------|-------------|
+| `local.localPath` | Ruta a la .kdbx local – el mismo archivo que en KeePassXC. Absoluta (ej. `/ruta/a/keepass_passwords.kdbx`) o relativa al directorio del proyecto. |
 | `ftp.host` | Servidor (IP o hostname) |
 | `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
-| `ftp.type` | `ftp`, `sftp`, `scp` o `smb` |
+| `ftp.type` | `ftp`, `sftp`, `scp`, `smb` o `rclone`/`gdrive` (Google Drive) |
 | `ftp.user` | Usuario |
 | `ftp.password` | Contraseña |
 | `ftp.remotePath` | Ruta completa al .kdbx en el servidor |
 | `keepass.databasePassword` | Contraseña maestra KeePass |
 
-**Opcional:** `KEEPASS_DB_PASSWORD` sustituye la contraseña maestra (más seguro que en config).
+**Opcional:** `KEEPASS_DB_PASSWORD` sustituye la contraseña maestra (más seguro que en config). `KEEPASS_LOCAL_PATH` sustituye la ruta a la KDBX local.
 
 ### 3. Ejecutar
 
@@ -69,12 +74,17 @@ Guías completas: [DE](docs/INSTALL.de.md) · [EN](docs/INSTALL.en.md) · [ES](d
 
 ## Cómo funciona Sync & Merge
 
+**Solo merge – sin sobrescribir.** Ambas fuentes se combinan; entradas locales y remotas se fusionan. Nada se reemplaza a ciegas.
+
 1. Copia de seguridad de la DB local
 2. Descarga de la DB del servidor (FTP/SFTP/SMB/SCP)
-3. Merge con KeePassXC-CLI (DB local + descargada)
-4. Subida de la DB fusionada al servidor
+3. Validación del archivo descargado (rechazo si KDBX corrupto o incompatible)
+4. Merge con KeePassXC-CLI (DB local + descargada)
+5. Subida de la DB fusionada al servidor
 
 El archivo en el servidor se mantiene actualizado; en el móvil abre la misma DB por FTP/SFTP con las mismas credenciales.
+
+**Si falla el merge:** Ni el archivo local ni el del servidor se modifican. Las copias en `backups/` permanecen intactas.
 
 ---
 
@@ -90,6 +100,8 @@ En KeePass2Android, Strongbox, etc. usa los mismos valores que en `config.json`:
 | **Usuario** | `ftp.user` |
 | **Contraseña** | `ftp.password` |
 | **Directorio inicial** | Parte directorio de `ftp.remotePath` |
+
+**Compatibilidad:** Usar formato KDBX 3.1 para mejor compatibilidad con KeePass2Android y `keepassxc-cli`. En KeePassXC: configuración de base de datos → guardar como KDBX 3.1 si hace falta. En KeePass2Android: cerrar/guardar correctamente la base de datos tras cambios para evitar corrupción en el sync FTP.
 
 Más: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
 
