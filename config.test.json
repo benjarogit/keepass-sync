@@ -1,0 +1,19 @@
+{
+  "ftp": {
+    "host": "localhost",
+    "port": 21,
+    "user": "test",
+    "password": "test",
+    "type": "ftp",
+    "remotePath": "/test.kdbx"
+  },
+  "local": {
+    "localPath": "test_local.kdbx",
+    "tempPath": "temp_test.kdbx",
+    "backupDir": "backups"
+  },
+  "keepass": {
+    "databasePassword": "test",
+    "keepassXCPath": "keepassxc-cli"
+  }
+}
