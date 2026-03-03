@@ -38,12 +38,14 @@ if (!help.ok) {
 }
 
 // 2. --version must exit 0 and print version
+const pkg = JSON.parse(fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf8'));
+const expectedVer = pkg.version;
 const ver = run('node', [syncJs, '--version']);
 if (!ver.ok) {
   console.error('FAIL: node sync.js --version should exit 0');
   failed++;
-} else if (!ver.stdout || !ver.stdout.includes('2.0.0')) {
-  console.error('FAIL: --version should print 2.0.0');
+} else if (!ver.stdout || !ver.stdout.includes(expectedVer)) {
+  console.error('FAIL: --version should print ' + expectedVer);
   failed++;
 } else {
   console.log('OK: --version');
