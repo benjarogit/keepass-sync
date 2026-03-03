@@ -8,7 +8,7 @@
   },
   "scripts": {
     "sync": "node sync.js",
-    "test": "node sync.js --test",
+    "test": "node scripts/smoke-test.js",
     "status": "node sync.js --status",
     "open-ftp": "node scripts/open_ftp.js"
   },
@@ -19,10 +19,22 @@
     "merge",
     "ftp",
     "sftp",
-    "password-manager"
+    "scp",
+    "smb",
+    "password-manager",
+    "cli",
+    "nodejs"
   ],
-  "author": "",
+  "author": "Sunny C.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjarogit/keepass-sync.git"
+  },
+  "bugs": {
+    "url": "https://github.com/benjarogit/keepass-sync/issues"
+  },
+  "homepage": "https://github.com/benjarogit/keepass-sync#readme",
   "engines": {
     "node": ">=18.0.0"
   },
