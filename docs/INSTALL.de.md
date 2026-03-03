@@ -42,22 +42,13 @@ Der Installer:
 ### Protokoll-spezifische Anforderungen:
 
 **FTP:**
-- `lftp` installieren: `sudo pacman -S lftp` (Arch/CachyOS) oder `sudo apt install lftp` (Debian/Ubuntu)
-
-**SFTP:**
-- `lftp` installieren (wie oben)
+**FTP/SFTP:** Über Node.js – keine zusätzlichen Tools.
 
 **SMB/CIFS:**
 - Linux/macOS: `smbclient` installieren: `sudo pacman -S samba` oder `sudo apt install samba-common`
 - Windows: FTP oder SFTP verwenden (SMB nicht unterstützt)
 
-**SCP:**
-- Linux/macOS: `sshpass` installieren: `sudo pacman -S sshpass` oder `sudo apt install sshpass`
-- SCP: Wie SFTP über Node.js
-
-**Datei-Überwachung (--watch):**
-- Linux: `pyinotify`: `pip install pyinotify`
-- macOS/Windows: `watchdog`: `pip install watchdog`
+**SCP:** Wie SFTP über Node.js.
 
 ### Linux
 - Node.js 18+ erforderlich
@@ -74,7 +65,7 @@ Der Installer:
 ## 🚀 Schnellinstallation (Empfohlen für Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd "/pfad/zum/keepass-sync"
 ./linux/install.sh
 ```
 
@@ -278,7 +269,7 @@ crontab -e
 
 **Eintrag:**
 ```
-0 6 * * * /usr/bin/node /usr/bin/node /pfad/zum/keepass-sync/sync.js >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /pfad/zum/keepass-sync/sync.js >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
 ```
 
 ---
@@ -355,22 +346,13 @@ Der Installer:
 ### Protokoll-spezifische Anforderungen:
 
 **FTP:**
-- `lftp` installieren: `sudo pacman -S lftp` (Arch/CachyOS) oder `sudo apt install lftp` (Debian/Ubuntu)
-
-**SFTP:**
-- `lftp` installieren (wie oben)
+**FTP/SFTP:** Über Node.js – keine zusätzlichen Tools.
 
 **SMB/CIFS:**
 - Linux/macOS: `smbclient` installieren: `sudo pacman -S samba` oder `sudo apt install samba-common`
 - Windows: FTP oder SFTP verwenden (SMB nicht unterstützt)
 
-**SCP:**
-- Linux/macOS: `sshpass` installieren: `sudo pacman -S sshpass` oder `sudo apt install sshpass`
-- SCP: Wie SFTP über Node.js
-
-**Datei-Überwachung (--watch):**
-- Linux: `pyinotify`: `pip install pyinotify`
-- macOS/Windows: `watchdog`: `pip install watchdog`
+**SCP:** Wie SFTP über Node.js.
 
 ### Linux
 - Node.js 18+ erforderlich
@@ -387,7 +369,7 @@ Der Installer:
 ## 🚀 Schnellinstallation (Empfohlen für Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd "/pfad/zum/keepass-sync"
 ./linux/install.sh
 ```
 
@@ -591,7 +573,7 @@ crontab -e
 
 **Eintrag:**
 ```
-0 6 * * * /usr/bin/node /usr/bin/node /pfad/zum/keepass-sync/sync.js >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /pfad/zum/keepass-sync/sync.js >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
 ```
 
 ---
@@ -660,25 +642,21 @@ The installer:
 ### Protocol-specific Requirements:
 
 **FTP:**
-- Install `lftp`: `sudo pacman -S lftp` (Arch/CachyOS) or `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: via Node.js – no extra tools
 
 **SFTP:**
-- Install `lftp` (as above)
-
+- 
 **SMB/CIFS:**
 - Linux/macOS: Install `smbclient`: `sudo pacman -S samba` or `sudo apt install samba-common`
-- Windows: Native support (optional: `pysmb` Python library)
+- Windows: FTP/SFTP via Node.js
 
 **SCP:**
 - Linux/macOS: Install `sshpass`: `sudo pacman -S sshpass` or `sudo apt install sshpass`
-- Windows: `paramiko` Python library: `pip install paramiko`
 
 ### Linux
-- Optional: Python 3.6+ for cross-platform version
 
 ### Windows
 - PowerShell 5.1+ (pre-installed)
-- Optional: Python 3.6+ for cross-platform version
 
 ### macOS
 - Homebrew (optional but recommended)
@@ -688,7 +666,7 @@ The installer:
 ## 🚀 Quick Installation (Recommended for Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd "/pfad/zum/keepass-sync"
 ./linux/install.sh
 ```
 
@@ -923,19 +901,17 @@ El instalador:
 ### Requisitos Específicos por Protocolo:
 
 **FTP:**
-- Instalar `lftp`: `sudo pacman -S lftp` (Arch/CachyOS) o `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: vía Node.js – sin herramientas adicionales
 
 **SFTP:**
-- Instalar `lftp` (como arriba)
-
+- 
 **SMB/CIFS:**
 - Linux/macOS: Instalar `smbclient`: `sudo pacman -S samba` o `sudo apt install samba-common`
-- Windows: Soporte nativo (opcional: biblioteca Python `pysmb`)
+- Windows: FTP/SFTP vía Node.js
 
 **SCP:**
 - Linux/macOS: Instalar `sshpass`: `sudo pacman -S sshpass` o `sudo apt install sshpass`
-- Windows: Bibliotec Python `paramiko`: `pip install paramiko`
-
+- 
 ### Linux
 - Opcional: Python 3.6+ para versión multiplataforma
 
@@ -951,7 +927,7 @@ El instalador:
 ## 🚀 Instalación Rápida (Recomendado para Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd "/pfad/zum/keepass-sync"
 ./linux/install.sh
 ```
 
