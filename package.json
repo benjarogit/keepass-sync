@@ -8,6 +8,7 @@
   },
   "scripts": {
     "sync": "node sync.js",
+    "setup": "node scripts/setup.js",
     "test": "node scripts/smoke-test.js",
     "status": "node sync.js --status",
     "open-ftp": "node scripts/open_ftp.js"
