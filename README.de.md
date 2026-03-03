@@ -43,7 +43,7 @@ cp config.example.json config.json
 | Feld | Bedeutung |
 |------|-----------|
 | `local.localPath` | Pfad zur lokalen .kdbx – dieselbe Datei wie in KeePassXC. Absolut (z.B. `/mnt/ssd2/.../keepass_passwords.kdbx`) oder relativ zum Projektordner. |
-| `ftp.type` | `ftp`, `sftp`, `scp`, `smb` oder `rclone`/`gdrive` |
+| `ftp.type` | `ftp`, `sftp`, `scp`, `smb` oder `rclone`/`gdrive` (empfohlen: rclone, sonst sftp) |
 | `ftp.host` | Server (IP/Hostname) – bei rclone nicht nötig |
 | `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
 | `ftp.user` | Benutzername |
@@ -66,7 +66,7 @@ keepass-sync --status # Status
 **Wrappers:** `./linux/sync_ftp.sh` · `./mac/sync_ftp.sh` · `windows\sync_ftp.bat` · `.\windows\sync_ftp.ps1`
 
 <details>
-<summary><strong>Detaillierte Installation & Automatisierung (Systemd, Cron, Task Scheduler)</strong></summary>
+<summary><strong>Detaillierte Installation & Automatisierung (Systemd, Cron, Task Scheduler, LaunchAgent)</strong></summary>
 
 Vollständige Anleitungen: [DE](docs/INSTALL.de.md) · [EN](docs/INSTALL.en.md) · [ES](docs/INSTALL.es.md)
 
@@ -79,14 +79,14 @@ Vollständige Anleitungen: [DE](docs/INSTALL.de.md) · [EN](docs/INSTALL.en.md) 
 **Nur Merge – kein Überschreiben.** Beide Quellen werden zusammengeführt; lokale und remote Einträge werden gemergt. Nichts wird blind ersetzt.
 
 1. Backup der lokalen DB
-2. Download der DB vom Server (FTP/SFTP/SMB/SCP)
+2. Download der DB vom Remote (FTP/SFTP/SMB/SCP oder Google Drive per rclone)
 3. Validierung der heruntergeladenen Datei (bei Korrupt oder inkompatiblen KDBX: Abbruch)
 4. Merge mit KeePassXC-CLI (lokale + heruntergeladene DB)
-5. Upload der gemergten DB zurück auf den Server
+5. Upload der gemergten DB zurück auf den Remote
 
-Die Datei auf dem Server bleibt aktuell; auf dem Handy die gleiche DB per FTP/SFTP mit denselben Zugangsdaten öffnen.
+Die Remote-Datei bleibt aktuell. **Handy:** Bei Google Drive die DB direkt aus Drive öffnen. Bei FTP/SFTP dieselben Zugangsdaten in KeePass2Android nutzen.
 
-**Bei Merge-Fehler:** Weder lokale noch Server-Datei wird geändert. Backups in `backups/` bleiben unverändert.
+**Bei Merge-Fehler:** Weder lokale noch Remote-Datei wird geändert. Backups in `backups/` bleiben unverändert.
 
 ### Wann synchronisieren?
 
@@ -128,7 +128,34 @@ npm run open-ftp
 
 ---
 
+## FAQ
+
+**Brauche ich einen FTP-Server?** Bei Google Drive: nein, rclone wird genutzt. Bei FTP/SFTP/SMB/SCP: ja, du brauchst Server-Zugang, wo die .kdbx liegt.
+
+**Wie funktioniert der Merge?** KeePassXC-CLI fügt die heruntergeladene Datei in deine lokale Kopie ein; widersprüchliche Einträge werden kombiniert. Beide Dateien nutzen dasselbe Masterpasswort. **Nur Merge – kein Überschreiben.** Daten werden nie blind ersetzt.
+
+**Was passiert bei Merge-Fehler?** Weder deine lokale DB noch die Remote-Datei wird geändert. Siehe Android-Abschnitt für Kompatibilitätstipps. Backups in `backups/` bleiben sicher.
+
+**Läuft es unter Windows ohne WSL?** Ja. Node.js handhabt FTP/SFTP nativ; kein lftp oder WSL nötig.
+
+---
+
+## Entwicklung
+
+- **Tests:** `npm test`
+- **KeePassXC-Referenz:** `keepassxc/` Submodul – `git submodule update --init`
+
+---
+
+## Releases & Versionierung
+
+Version in `package.json` und Git-Tags (z.B. `v2.0.2`) sind abgestimmt. npm-Paket und GitHub-Releases entsprechen sich.
+
+---
+
 ## Dokumentation
+
+[docs/](docs/README.md) – Installation & Automatisierung · Testen · Release-Workflow
 
 | Thema | DE | EN | ES |
 |-------|----|----|-----|
