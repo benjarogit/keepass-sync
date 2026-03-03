@@ -17,8 +17,7 @@ Sprachen: [Deutsch](README.de.md) | [English](README.en.md) | [Español](README.
 
 - Linux, Windows (inkl. WSL2), macOS (x86_64)
 - **Node.js 18+** und **KeePassXC** (mit `keepassxc-cli`) erforderlich
-
-**Empfohlen:** Google Drive (rclone) für zuverlässige Cloud-Synchronisation und beste Mobil-App-Kompatibilität – umgeht FTP/SFTP-Probleme mit KeePass2Android.
+- **Protokolle (Empfehlung):** 1. Google Drive (rclone), 2. SFTP (bei FTP-Protokollen vorzuziehen), 3. FTP, SMB, SCP
 
 ---
 
@@ -99,17 +98,17 @@ Die Datei auf dem Server bleibt aktuell; auf dem Handy die gleiche DB per FTP/SF
 
 ## Android: Externe Datenbank einrichten
 
+### Google Drive (empfohlen)
+
+Bei `type: "rclone"` die Datenbank in KeePass2Android direkt aus **Google Drive** öffnen (eingebaute Unterstützung). Dieselbe Datei wie in `remotePath` wählen, z.B. im Ordner `KeePass/keepass_passwords.kdbx`. Keine FTP-Konfiguration nötig.
+
 ### FTP/SFTP
 
-In KeePass2Android dieselben Werte wie in `config.json` nutzen: Host, Port, Benutzer, Passwort, Startverzeichnis.
+In KeePass2Android dieselben Werte wie in `config.json` nutzen: Host, Port, Benutzer, Passwort, Startverzeichnis. **SFTP vorziehen** (Passwörter verschlüsselt; weniger Kompatibilitätsprobleme als mit FTP).
 
-### Google Drive
+**Tipp:** Bei Problemen mit KeePass2Android und FTP: In KeePassXC auf KDBX 3.1 speichern. Mit Google Drive meist nicht nötig.
 
-Bei `type: "rclone"` die Datenbank in KeePass2Android direkt aus **Google Drive** öffnen (eingebaute Unterstützung). Dieselbe Datei wie in `remotePath` wählen, z.B. im Ordner `KeePass/keepass_passwords.kdbx`.
-
-**Kompatibilität:** KDBX-3.1-Format für beste Kompatibilität. KeePass2Android speichert Google-Drive-Dateien zuverlässiger als FTP.
-
-Mehr: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
+[KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
 
 ---
 
