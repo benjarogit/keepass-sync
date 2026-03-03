@@ -17,7 +17,7 @@ Languages: [Deutsch](README.de.md) | [English](README.en.md) | [Español](README
 
 - Linux, Windows (incl. WSL2), macOS (x86_64)
 - **Node.js 18+** and **KeePassXC** (with `keepassxc-cli`) required
-- **Recommended:** Google Drive (rclone) for reliable cloud sync and best mobile app compatibility – avoids FTP/SFTP issues with KeePass2Android
+- **Protocols (recommended order):** 1. Google Drive (rclone), 2. SFTP (prefer over FTP when using FTP protocols), 3. FTP, SMB, SCP
 
 ---
 
@@ -88,22 +88,28 @@ The file on the server stays up to date; on your phone, open the same DB via FTP
 
 ---
 
-## Android: Adding External Database via FTP
+## Android: Adding External Database
 
-In KeePass2Android, Strongbox, etc. use the same values as in `config.json`:
+### Google Drive (recommended)
+
+With `type: "rclone"` open the database in KeePass2Android directly from **Google Drive** (built-in support). Choose the same file as in `remotePath`, e.g. in folder `KeePass/keepass_passwords.kdbx`. No FTP configuration needed.
+
+### FTP/SFTP
+
+In KeePass2Android, Strongbox, etc. use the same values as in `config.json`: Host, Port, Username, Password, Start directory. **Prefer SFTP** (encryption; fewer compatibility issues than FTP).
 
 | App field | Enter |
 |-----------|-------|
 | **Host** | `ftp.host` |
-| **Port** | `ftp.port` (21 or 22) |
+| **Port** | 21 (FTP) or 22 (SFTP) |
 | **Encryption** | FTP or SFTP (`ftp.type`) |
 | **Username** | `ftp.user` |
 | **Password** | `ftp.password` |
 | **Start directory** | Directory part of `ftp.remotePath` |
 
-**Compatibility:** Use KDBX 3.1 format for best compatibility with KeePass2Android and `keepassxc-cli`. In KeePassXC: Database settings → save as KDBX 3.1 if needed. In KeePass2Android: properly close/save the database after changes to avoid corruption on FTP sync.
+**Tip:** If you have issues with KeePass2Android and FTP: In KeePassXC save as KDBX 3.1. Usually not needed with Google Drive.
 
-More: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
+[KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
 
 ---
 
