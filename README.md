@@ -25,78 +25,50 @@
 
 ---
 
-## Installation & Setup (complete guide)
-
-<details open>
-<summary><strong>1. Installation (npm oder Source)</strong></summary>
-
-### From npm (recommended)
-
-```bash
-npm install -g keepass-sync
-# or locally: npm install keepass-sync
-```
-
-### From source
-
-```bash
-git clone https://github.com/benjarogit/keepass-sync.git
-cd keepass-sync
-npm install
-```
+## Installation
 
 **Requirements:** Node.js 18+, KeePassXC (with `keepassxc-cli` in PATH)
 
-</details>
+### 1. Install
 
-<details>
-<summary><strong>2. Konfiguration (config.json)</strong></summary>
+```bash
+npm install -g keepass-sync
+# or from source: git clone … && cd keepass-sync && npm install
+```
+
+### 2. Configure
 
 ```bash
 cp config.example.json config.json
-# config.json bearbeiten – siehe Tabelle unten
+# Edit config.json – see table below
 ```
 
-| Field | Bedeutung |
-|-------|-----------|
-| `ftp.host` | Server (IP oder Hostname) |
+| Field | Meaning |
+|-------|---------|
+| `ftp.host` | Server (IP or hostname) |
 | `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
-| `ftp.type` | `ftp`, `sftp`, `scp` oder `smb` |
-| `ftp.user` | Benutzername |
-| `ftp.password` | Passwort |
-| `ftp.remotePath` | Vollständiger Pfad zur .kdbx auf dem Server |
-| `keepass.databasePassword` | KeePass-Masterpasswort |
+| `ftp.type` | `ftp`, `sftp`, `scp`, or `smb` |
+| `ftp.user` | Username |
+| `ftp.password` | Password |
+| `ftp.remotePath` | Full path to .kdbx on server |
+| `keepass.databasePassword` | KeePass master password |
 
-**Optional:** `KEEPASS_DB_PASSWORD` Umgebungsvariable überschreibt das Masterpasswort (sicherer als in config.json).
+**Optional:** `KEEPASS_DB_PASSWORD` env var overrides the master password (safer than storing in config).
 
-</details>
-
-<details>
-<summary><strong>3. Erster Lauf & Test</strong></summary>
+### 3. Run
 
 ```bash
-# Verbindung testen (ohne Sync)
-keepass-sync --test
-# bzw. npm run sync -- --test oder node sync.js --test
-
-# Normale Synchronisation
-keepass-sync
-# bzw. npm run sync oder node sync.js
-
-# Status prüfen
-keepass-sync --status
+keepass-sync --test   # Test connection (no sync)
+keepass-sync          # Sync & merge
+keepass-sync --status # Status
 ```
 
 **Wrappers:** `./linux/sync_ftp.sh` · `./mac/sync_ftp.sh` · `windows\sync_ftp.bat` · `.\windows\sync_ftp.ps1`
 
-</details>
-
 <details>
-<summary><strong>4. Automatisierung (Systemd, Cron, Task Scheduler)</strong></summary>
+<summary><strong>Detailed installation & automation (Systemd, Cron, Task Scheduler)</strong></summary>
 
-Ausführliche Anleitungen mit Systemd, Cron (Linux), Launchd (macOS) und Task Scheduler (Windows):
-
-- [Installation & Automation (DE)](docs/INSTALL.de.md) · [EN](docs/INSTALL.en.md) · [ES](docs/INSTALL.es.md)
+Full guides: [DE](docs/INSTALL.de.md) · [EN](docs/INSTALL.en.md) · [ES](docs/INSTALL.es.md)
 
 </details>
 
@@ -133,20 +105,6 @@ Wenn die App nach **FTP-Zugangsdaten** fragt (Dialog „FTP-Zugangsdaten eingebe
 **Sicherheit:** SFTP ist FTP vorzuziehen (Passwörter verschlüsselt).
 
 Mehr: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
-
----
-
-## Configuration (Reference)
-
-| Field | Meaning |
-|-------|---------|
-| `ftp.host` | Server (IP or hostname) |
-| `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
-| `ftp.type` | `ftp`, `sftp`, `scp`, or `smb` |
-| `ftp.user` | Username |
-| `ftp.password` | Password |
-| `ftp.remotePath` | Full path to .kdbx on server |
-| `keepass.databasePassword` | KeePass master password |
 
 ---
 
@@ -195,8 +153,10 @@ Version in `package.json` and Git tags (e.g. `v2.0.1`) stay in sync. npm package
 
 ## Documentation
 
-- [Installation & Automation](docs/INSTALL.de.md) (DE) · [EN](docs/INSTALL.en.md) · [ES](docs/INSTALL.es.md)
-- [Testing](docs/TEST.de.md) (DE) · [EN](docs/TEST.en.md) · [ES](docs/TEST.es.md)
+| Topic | DE | EN | ES |
+|-------|----|----|-----|
+| Installation & Automation | [INSTALL](docs/INSTALL.de.md) | [INSTALL](docs/INSTALL.en.md) | [INSTALL](docs/INSTALL.es.md) |
+| Testing | [TEST](docs/TEST.de.md) | [TEST](docs/TEST.en.md) | [TEST](docs/TEST.es.md) |
 
 ---
 
