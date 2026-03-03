@@ -1,4 +1,6 @@
-# KeePass Sync - Windows (calls Node.js)
+# KeePass Sync - Windows wrapper (calls node sync.js)
+# Copyright (c) 2026 Sunny C.
+
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location (Join-Path $ScriptDir "..")
 
