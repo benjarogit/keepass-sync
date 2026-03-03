@@ -19,7 +19,7 @@
 cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
 
 # Ejecutar wrapper directamente
-python3 sync.py
+node sync.js
 
 # O como ejecutable (si se hizo ejecutable)
 ./sync.py
@@ -27,7 +27,7 @@ python3 sync.py
 
 **Qué sucede:**
 - El wrapper detecta automáticamente el sistema operativo (Linux/Windows/macOS)
-- Llama automáticamente a `python/sync_ftp.py` (preferido)
+- Llama automáticamente a `sync.js` (preferido)
 - Si Python no está disponible: Fallback a script específico de plataforma
 
 ### b) Probar Archivo .sh Directamente (Linux)
@@ -44,7 +44,7 @@ bash linux/sync_ftp.sh
 
 **Qué sucede:**
 - El script verifica si Python3 está disponible
-- Llama automáticamente a `python/sync_ftp.py`
+- Llama automáticamente a `sync.js`
 - Si Python no se encuentra: Mensaje de error
 
 ### Probar con Modo Debug
@@ -61,7 +61,7 @@ Habilita debug en `config.json`:
 
 Luego ejecuta:
 ```bash
-python3 python/sync_ftp.py
+node sync.js
 ```
 
 ### Salida Esperada
@@ -85,7 +85,7 @@ En errores verás mensajes de error detallados en el registro.
 ### Solución de Problemas
 
 **Problema: "Archivo de configuración no encontrado"**
-- Asegúrate de que `config.json` existe. Usa `python3 install.py` para crearlo.
+- Asegúrate de que `config.json` existe. Usa `cp config.example.json config.json` para crearlo.
 - O copia `config.example.json` a `config.json` y edita manualmente
 
 **Problema: "KeePassXC-CLI no encontrado"**
@@ -132,7 +132,7 @@ En errores verás mensajes de error detallados en el registro.
 cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
 
 # Wrapper direkt ausführen
-python3 sync.py
+node sync.js
 
 # Oder als ausführbare Datei (wenn ausführbar gemacht)
 ./sync.py
@@ -140,7 +140,7 @@ python3 sync.py
 
 **Was passiert:**
 - Wrapper erkennt automatisch das Betriebssystem (Linux/Windows/macOS)
-- Ruft automatisch `python/sync_ftp.py` auf (bevorzugt)
+- Ruft automatisch `sync.js` auf (bevorzugt)
 - Falls Python nicht verfügbar: Fallback zu plattformspezifischem Script
 
 ### b) .sh Datei direkt testen (Linux)
@@ -157,7 +157,7 @@ bash linux/sync_ftp.sh
 
 **Was passiert:**
 - Script prüft ob Python3 verfügbar ist
-- Ruft automatisch `python/sync_ftp.py` auf
+- Ruft automatisch `sync.js` auf
 - Falls Python nicht gefunden: Fehlermeldung
 
 ### Verbindung testen (ohne Sync)
@@ -165,7 +165,7 @@ bash linux/sync_ftp.sh
 **Wichtig:** Teste zuerst die Verbindung, bevor du eine vollständige Synchronisation durchführst:
 
 ```bash
-python3 python/sync_ftp.py --test
+node sync.js --test
 ```
 
 Dies prüft:
@@ -191,7 +191,7 @@ Teste Verbindung (FTP)...
 Zeige aktuelle Status-Informationen:
 
 ```bash
-python3 python/sync_ftp.py --status
+node sync.js --status
 ```
 
 **Zeigt:**
@@ -205,7 +205,7 @@ python3 python/sync_ftp.py --status
 Aktiviere Debug in `config.json` oder nutze `--verbose`:
 
 ```bash
-python3 python/sync_ftp.py -v
+node sync.js -v
 ```
 
 Oder in `config.json`:
@@ -238,7 +238,7 @@ Bei Fehlern siehst du detaillierte Fehlermeldungen im Log.
 ### Fehlerbehebung
 
 **Problem: "Konfigurationsdatei nicht gefunden"**
-- Stelle sicher, dass `config.json` existiert. Nutze `python3 install.py` zum Erstellen.
+- Stelle sicher, dass `config.json` existiert. Nutze `cp config.example.json config.json` zum Erstellen.
 - Oder kopiere `config.example.json` zu `config.json` und bearbeite manuell
 
 **Problem: "KeePassXC-CLI nicht gefunden"**
@@ -268,26 +268,26 @@ Bei Fehlern siehst du detaillierte Fehlermeldungen im Log.
 
 **Alle verfügbaren Optionen:**
 ```bash
-python3 python/sync_ftp.py --help
+node sync.js --help
 ```
 
 **Beispiele:**
 ```bash
 # Normale Synchronisation
-python3 python/sync_ftp.py
-python3 python/sync_ftp.py --sync
+node sync.js
+node sync.js --sync
 
 # Verbose (Debug-Ausgabe)
-python3 python/sync_ftp.py -v
+node sync.js -v
 
 # Quiet (nur Fehler)
-python3 python/sync_ftp.py -q
+node sync.js -q
 
 # Alternative Config-Datei
-python3 python/sync_ftp.py --config alt_config.json
+node sync.js --config alt_config.json
 
 # Version anzeigen
-python3 python/sync_ftp.py --version
+node sync.js --version
 ```
 
 ### Datei-Überwachung testen
@@ -295,7 +295,7 @@ python3 python/sync_ftp.py --version
 Teste automatische Synchronisation bei Datei-Änderung:
 
 ```bash
-python3 python/sync_ftp.py --watch
+node sync.js --watch
 ```
 
 **Was passiert:**
@@ -318,7 +318,7 @@ python3 python/sync_ftp.py --watch
 cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
 
 # Run wrapper directly
-python3 sync.py
+node sync.js
 
 # Or as executable (if made executable)
 ./sync.py
@@ -326,7 +326,7 @@ python3 sync.py
 
 **What happens:**
 - Wrapper automatically detects the operating system (Linux/Windows/macOS)
-- Calls `python/sync_ftp.py` automatically (preferred)
+- Calls `sync.js` automatically (preferred)
 - If Python not available: Fallback to platform-specific script
 
 ### b) Test .sh File Directly (Linux)
@@ -343,7 +343,7 @@ bash linux/sync_ftp.sh
 
 **What happens:**
 - Script checks if Python3 is available
-- Automatically calls `python/sync_ftp.py`
+- Automatically calls `sync.js`
 - If Python not found: Error message
 
 ### Test with Debug Mode
@@ -360,7 +360,7 @@ Enable debug in `config.json`:
 
 Then run:
 ```bash
-python3 python/sync_ftp.py
+node sync.js
 ```
 
 ### Expected Output
@@ -405,7 +405,7 @@ On errors you'll see detailed error messages in the log.
 cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
 
 # Ejecutar wrapper directamente
-python3 sync.py
+node sync.js
 
 # O como ejecutable (si se hizo ejecutable)
 ./sync.py
@@ -413,7 +413,7 @@ python3 sync.py
 
 **Qué sucede:**
 - El wrapper detecta automáticamente el sistema operativo (Linux/Windows/macOS)
-- Llama automáticamente a `python/sync_ftp.py` (preferido)
+- Llama automáticamente a `sync.js` (preferido)
 - Si Python no está disponible: Fallback a script específico de plataforma
 
 ### b) Probar Archivo .sh Directamente (Linux)
@@ -430,7 +430,7 @@ bash linux/sync_ftp.sh
 
 **Qué sucede:**
 - El script verifica si Python3 está disponible
-- Llama automáticamente a `python/sync_ftp.py`
+- Llama automáticamente a `sync.js`
 - Si Python no se encuentra: Mensaje de error
 
 ### Probar con Modo Debug
@@ -447,7 +447,7 @@ Habilita debug en `config.json`:
 
 Luego ejecuta:
 ```bash
-python3 python/sync_ftp.py
+node sync.js
 ```
 
 ### Salida Esperada
@@ -471,7 +471,7 @@ En errores verás mensajes de error detallados en el registro.
 ### Solución de Problemas
 
 **Problema: "Archivo de configuración no encontrado"**
-- Asegúrate de que `config.json` existe. Usa `python3 install.py` para crearlo.
+- Asegúrate de que `config.json` existe. Usa `cp config.example.json config.json` para crearlo.
 - O copia `config.example.json` a `config.json` y edita manualmente
 
 **Problema: "KeePassXC-CLI no encontrado"**

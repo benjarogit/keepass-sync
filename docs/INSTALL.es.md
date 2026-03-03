@@ -22,7 +22,7 @@ Esta guía detallada explica cómo instalar y ejecutar automáticamente el scrip
 Para usuarios sin experiencia, hay un instalador interactivo:
 
 ```bash
-python3 install.py
+npm install && cp config.example.json config.json
 ```
 
 El instalador:
@@ -100,7 +100,7 @@ After=network.target
 Type=oneshot
 User=tu-usuario
 WorkingDirectory=/ruta/a/keepass-sync
-ExecStart=/ruta/a/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /ruta/a/keepass-sync/sync.js
 
 [Install]
 WantedBy=multi-user.target
@@ -125,7 +125,7 @@ Before=shutdown.target
 Type=oneshot
 User=tu-usuario
 WorkingDirectory=/ruta/a/keepass-sync
-ExecStart=/ruta/a/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /ruta/a/keepass-sync/sync.js
 TimeoutStartSec=0
 
 [Install]
@@ -141,7 +141,7 @@ crontab -e
 
 **Añadir entrada:**
 ```
-0 6 * * * /ruta/a/keepass-sync/python/sync_ftp.py >> /ruta/a/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /ruta/a/keepass-sync/sync.js >> /ruta/a/keepass-sync/sync_cron.log 2>&1
 ```
 
 **Para ejecución en reposo (cada 5 minutos):**
@@ -151,7 +151,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 # O: sudo apt install xprintidle  # Debian/Ubuntu
 
 # Luego en crontab:
-*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /ruta/a/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /usr/bin/node /ruta/a/keepass-sync/sync.js; fi
 ```
 
 ### Windows - Programador de Tareas (Recomendado)
@@ -208,8 +208,8 @@ Crear un acceso directo:
        <string>com.user.keepass-sync</string>
        <key>ProgramArguments</key>
        <array>
-           <string>/usr/bin/python3</string>
-           <string>/ruta/a/keepass-sync/python/sync_ftp.py</string>
+           <string>/usr/bin/node</string>
+           <string>/usr/bin/node</string><string>/ruta/a/keepass-sync/sync.js</string>
        </array>
        <key>RunAtLoad</key>
        <true/>
@@ -236,7 +236,7 @@ crontab -e
 
 **Entrada:**
 ```
-0 6 * * * /usr/bin/python3 /ruta/a/keepass-sync/python/sync_ftp.py >> /ruta/a/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /usr/bin/node /ruta/a/keepass-sync/sync.js >> /ruta/a/keepass-sync/sync_cron.log 2>&1
 ```
 
 ---
@@ -252,7 +252,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 
 Luego en Cron:
 ```
-*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /ruta/a/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /usr/bin/node /ruta/a/keepass-sync/sync.js; fi
 ```
 
 ### Windows
@@ -293,7 +293,7 @@ Diese detaillierte Anleitung erklärt, wie du das KeePass Sync Script auf deinem
 Für unerfahrene Benutzer gibt es einen interaktiven Installer:
 
 ```bash
-python3 install.py
+npm install && cp config.example.json config.json
 ```
 
 Der Installer:
@@ -361,22 +361,22 @@ Das Script unterstützt verschiedene Optionen:
 
 ```bash
 # Verbindung testen (ohne Sync, kein Backup)
-python3 python/sync_ftp.py --test
+node sync.js --test
 
 # Status anzeigen
-python3 python/sync_ftp.py --status
+node sync.js --status
 
 # Datei automatisch überwachen (läuft dauerhaft)
-python3 python/sync_ftp.py --watch
+node sync.js --watch
 
 # Normale Synchronisation
-python3 python/sync_ftp.py
-python3 python/sync_ftp.py --sync
-python3 python/sync_ftp.py -v  # Verbose
-python3 python/sync_ftp.py -q  # Quiet
+node sync.js
+node sync.js --sync
+node sync.js -v  # Verbose
+node sync.js -q  # Quiet
 
 # Hilfe anzeigen
-python3 python/sync_ftp.py --help
+node sync.js --help
 ```
 
 ### Retry-Konfiguration
@@ -413,7 +413,7 @@ After=network.target
 Type=oneshot
 User=dein-benutzername
 WorkingDirectory=/pfad/zum/keepass-sync
-ExecStart=/pfad/zum/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /pfad/zum/keepass-sync/sync.js
 
 [Install]
 WantedBy=multi-user.target
@@ -438,7 +438,7 @@ Before=shutdown.target
 Type=oneshot
 User=dein-benutzername
 WorkingDirectory=/pfad/zum/keepass-sync
-ExecStart=/pfad/zum/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /pfad/zum/keepass-sync/sync.js
 TimeoutStartSec=0
 
 [Install]
@@ -454,7 +454,7 @@ crontab -e
 
 **Eintrag hinzufügen:**
 ```
-0 6 * * * /pfad/zum/keepass-sync/python/sync_ftp.py >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /pfad/zum/keepass-sync/sync.js >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
 ```
 
 **Für Ausführung im Leerlauf (alle 5 Minuten):**
@@ -464,7 +464,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 # Oder: sudo apt install xprintidle  # Debian/Ubuntu
 
 # Dann in crontab:
-*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /pfad/zum/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /usr/bin/node /pfad/zum/keepass-sync/sync.js; fi
 ```
 
 ### Windows - Task Scheduler (Empfohlen)
@@ -521,8 +521,8 @@ Erstelle eine Verknüpfung:
        <string>com.user.keepass-sync</string>
        <key>ProgramArguments</key>
        <array>
-           <string>/usr/bin/python3</string>
-           <string>/pfad/zum/keepass-sync/python/sync_ftp.py</string>
+           <string>/usr/bin/node</string>
+           <string>/usr/bin/node</string><string>/pfad/zum/keepass-sync/sync.js</string>
        </array>
        <key>RunAtLoad</key>
        <true/>
@@ -549,7 +549,7 @@ crontab -e
 
 **Eintrag:**
 ```
-0 6 * * * /usr/bin/python3 /pfad/zum/keepass-sync/python/sync_ftp.py >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /usr/bin/node /pfad/zum/keepass-sync/sync.js >> /pfad/zum/keepass-sync/sync_cron.log 2>&1
 ```
 
 ---
@@ -565,7 +565,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 
 Dann in Cron:
 ```
-*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /pfad/zum/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /usr/bin/node /pfad/zum/keepass-sync/sync.js; fi
 ```
 
 ### Windows
@@ -598,7 +598,7 @@ This detailed guide explains how to install and automatically run the KeePass Sy
 For inexperienced users, there's an interactive installer:
 
 ```bash
-python3 install.py
+npm install && cp config.example.json config.json
 ```
 
 The installer:
@@ -676,7 +676,7 @@ After=network.target
 Type=oneshot
 User=your-username
 WorkingDirectory=/path/to/keepass-sync
-ExecStart=/path/to/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /path/to/keepass-sync/sync.js
 
 [Install]
 WantedBy=multi-user.target
@@ -701,7 +701,7 @@ Before=shutdown.target
 Type=oneshot
 User=your-username
 WorkingDirectory=/path/to/keepass-sync
-ExecStart=/path/to/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /path/to/keepass-sync/sync.js
 TimeoutStartSec=0
 
 [Install]
@@ -717,7 +717,7 @@ crontab -e
 
 **Add entry:**
 ```
-0 6 * * * /path/to/keepass-sync/python/sync_ftp.py >> /path/to/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /path/to/keepass-sync/sync.js >> /path/to/keepass-sync/sync_cron.log 2>&1
 ```
 
 **For execution on idle (every 5 minutes):**
@@ -727,7 +727,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 # Or: sudo apt install xprintidle  # Debian/Ubuntu
 
 # Then in crontab:
-*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /path/to/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /usr/bin/node /path/to/keepass-sync/sync.js; fi
 ```
 
 ### Windows - Task Scheduler (Recommended)
@@ -784,8 +784,8 @@ Create a shortcut:
        <string>com.user.keepass-sync</string>
        <key>ProgramArguments</key>
        <array>
-           <string>/usr/bin/python3</string>
-           <string>/path/to/keepass-sync/python/sync_ftp.py</string>
+           <string>/usr/bin/node</string>
+           <string>/usr/bin/node</string><string>/path/to/keepass-sync/sync.js</string>
        </array>
        <key>RunAtLoad</key>
        <true/>
@@ -812,7 +812,7 @@ crontab -e
 
 **Entry:**
 ```
-0 6 * * * /usr/bin/python3 /path/to/keepass-sync/python/sync_ftp.py >> /path/to/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /usr/bin/node /path/to/keepass-sync/sync.js >> /path/to/keepass-sync/sync_cron.log 2>&1
 ```
 
 ---
@@ -828,7 +828,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 
 Then in Cron:
 ```
-*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /path/to/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /usr/bin/node /path/to/keepass-sync/sync.js; fi
 ```
 
 ### Windows
@@ -861,7 +861,7 @@ Esta guía detallada explica cómo instalar y ejecutar automáticamente el scrip
 Para usuarios sin experiencia, hay un instalador interactivo:
 
 ```bash
-python3 install.py
+npm install && cp config.example.json config.json
 ```
 
 El instalador:
@@ -939,7 +939,7 @@ After=network.target
 Type=oneshot
 User=tu-usuario
 WorkingDirectory=/ruta/a/keepass-sync
-ExecStart=/ruta/a/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /ruta/a/keepass-sync/sync.js
 
 [Install]
 WantedBy=multi-user.target
@@ -964,7 +964,7 @@ Before=shutdown.target
 Type=oneshot
 User=tu-usuario
 WorkingDirectory=/ruta/a/keepass-sync
-ExecStart=/ruta/a/keepass-sync/python/sync_ftp.py
+ExecStart=/usr/bin/node /ruta/a/keepass-sync/sync.js
 TimeoutStartSec=0
 
 [Install]
@@ -980,7 +980,7 @@ crontab -e
 
 **Añadir entrada:**
 ```
-0 6 * * * /ruta/a/keepass-sync/python/sync_ftp.py >> /ruta/a/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /ruta/a/keepass-sync/sync.js >> /ruta/a/keepass-sync/sync_cron.log 2>&1
 ```
 
 **Para ejecución en reposo (cada 5 minutos):**
@@ -990,7 +990,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 # O: sudo apt install xprintidle  # Debian/Ubuntu
 
 # Luego en crontab:
-*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /ruta/a/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle 2>/dev/null || echo 0) -gt 300000 ]; then /usr/bin/node /ruta/a/keepass-sync/sync.js; fi
 ```
 
 ### Windows - Programador de Tareas (Recomendado)
@@ -1047,8 +1047,8 @@ Crear un acceso directo:
        <string>com.user.keepass-sync</string>
        <key>ProgramArguments</key>
        <array>
-           <string>/usr/bin/python3</string>
-           <string>/ruta/a/keepass-sync/python/sync_ftp.py</string>
+           <string>/usr/bin/node</string>
+           <string>/usr/bin/node</string><string>/ruta/a/keepass-sync/sync.js</string>
        </array>
        <key>RunAtLoad</key>
        <true/>
@@ -1075,7 +1075,7 @@ crontab -e
 
 **Entrada:**
 ```
-0 6 * * * /usr/bin/python3 /ruta/a/keepass-sync/python/sync_ftp.py >> /ruta/a/keepass-sync/sync_cron.log 2>&1
+0 6 * * * /usr/bin/node /usr/bin/node /ruta/a/keepass-sync/sync.js >> /ruta/a/keepass-sync/sync_cron.log 2>&1
 ```
 
 ---
@@ -1091,7 +1091,7 @@ sudo pacman -S xprintidle  # Arch/CachyOS
 
 Luego en Cron:
 ```
-*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /ruta/a/keepass-sync/python/sync_ftp.py; fi
+*/5 * * * * if [ $(xprintidle) -gt 300000 ]; then /usr/bin/node /ruta/a/keepass-sync/sync.js; fi
 ```
 
 ### Windows
