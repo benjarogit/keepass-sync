@@ -311,30 +311,30 @@ The installer:
 
 ### All Systems
 - KeePassXC installed (with `keepassxc-cli`)
-- Python 3.6+ installed
+- Node.js 18+ installed
 
 ### Protocol-specific Requirements:
 
 **FTP:**
-- Install `lftp`: `sudo pacman -S lftp` (Arch/CachyOS) or `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: No extra tools (Node.js packages)
 
 **SFTP:**
-- Install `lftp` (as above)
+- Same as FTP (Node.js)
 
 **SMB/CIFS:**
 - Linux/macOS: Install `smbclient`: `sudo pacman -S samba` or `sudo apt install samba-common`
-- Windows: Native support (optional: `pysmb` Python library)
+- Windows: Use FTP or SFTP (SMB not supported in this build)
 
 **SCP:**
 - Linux/macOS: Install `sshpass`: `sudo pacman -S sshpass` or `sudo apt install sshpass`
-- Windows: `paramiko` Python library: `pip install paramiko`
+- SCP: Same as SFTP (Node.js SSH)
 
 ### Linux
-- Optional: Python 3.6+ for cross-platform version
+- Node.js 18+ required
 
 ### Windows
 - PowerShell 5.1+ (pre-installed)
-- Optional: Python 3.6+ for cross-platform version
+- Node.js 18+ required
 
 ### macOS
 - Homebrew (optional but recommended)
@@ -574,30 +574,30 @@ El instalador:
 
 ### Todos los Sistemas
 - KeePassXC instalado (con `keepassxc-cli`)
-- Python 3.6+ instalado
+- Node.js 18+ instalado
 
 ### Requisitos Específicos por Protocolo:
 
 **FTP:**
-- Instalar `lftp`: `sudo pacman -S lftp` (Arch/CachyOS) o `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: Sin herramientas extra (paquetes Node.js)
 
 **SFTP:**
-- Instalar `lftp` (como arriba)
+- Igual que FTP (Node.js)
 
 **SMB/CIFS:**
 - Linux/macOS: Instalar `smbclient`: `sudo pacman -S samba` o `sudo apt install samba-common`
-- Windows: Soporte nativo (opcional: biblioteca Python `pysmb`)
+- Windows: Usar FTP o SFTP (SMB no soportado)
 
 **SCP:**
 - Linux/macOS: Instalar `sshpass`: `sudo pacman -S sshpass` o `sudo apt install sshpass`
-- Windows: Bibliotec Python `paramiko`: `pip install paramiko`
+- SCP: Igual que SFTP (Node.js SSH)
 
 ### Linux
-- Opcional: Python 3.6+ para versión multiplataforma
+- Node.js 18+ requerido
 
 ### Windows
 - PowerShell 5.1+ (pre-instalado)
-- Opcional: Python 3.6+ para versión multiplataforma
+- Node.js 18+ requerido
 
 ### macOS
 - Homebrew (opcional pero recomendado)
