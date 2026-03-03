@@ -1,6 +1,7 @@
 #!/bin/bash
-# Installations-Script für Linux
-# Installiert automatische Ausführung bei Leerlauf und Herunterfahren
+# KeePass Sync - Linux installation script
+# Installs systemd service (on shutdown) and cron job (idle sync every 5 min).
+# Copyright (c) 2026 Sunny C.
 
 set -e
 
