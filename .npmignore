@@ -1,0 +1,14 @@
+# Do not publish to npm
+keepassxc/
+config.json
+*.kdbx
+*.log
+*_log.txt
+backups/
+.git/
+.gitmodules
+node_modules/
+.cursor/
+*.code-workspace
+.DS_Store
+Thumbs.db
