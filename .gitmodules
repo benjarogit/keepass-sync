@@ -1,0 +1,3 @@
+[submodule "keepassxc"]
+	path = keepassxc
+	url = https://github.com/keepassxreboot/keepassxc.git
