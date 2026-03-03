@@ -1,186 +1,166 @@
 # KeePass Sync
 
-<div align="center">
+[![CI](https://github.com/benjarogit/keepass-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/benjarogit/keepass-sync/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/keepass-sync.svg)](https://www.npmjs.com/package/keepass-sync)
+[![npm downloads](https://img.shields.io/npm/dm/keepass-sync.svg)](https://www.npmjs.com/package/keepass-sync)
+[![Node](https://img.shields.io/node/v/keepass-sync)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/github/license/benjarogit/keepass-sync)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/benjarogit/keepass-sync)](https://github.com/benjarogit/keepass-sync/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/benjarogit/keepass-sync)](https://github.com/benjarogit/keepass-sync/issues)
 
-**Cross‑platform KeePass / KeePassXC database synchronization over FTP, SFTP, SMB and SCP – with automatic merge using `keepassxc-cli`.**  
-**Plattformen:** Linux · Windows (inkl. WSL2) · macOS (x86_64)
+**Sync and merge your KeePass/KeePassXC password database over FTP, SFTP, SMB, or SCP.** Keeps the remote file up to date; changes on PC or mobile are merged on the next sync.
 
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![License](https://img.shields.io/github/license/benjarogit/keepass-sync)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/benjarogit/keepass-sync?style=social)](https://github.com/benjarogit/keepass-sync/stargazers)
-[![GitHub downloads](https://img.shields.io/github/downloads/benjarogit/keepass-sync/total)](https://github.com/benjarogit/keepass-sync/releases)
-
-**Sprachen · Languages:** [Deutsch](README.de.md) · [English](README.en.md) · [Español](README.es.md)
-
-</div>
+**Languages:** [Deutsch](README.de.md) · [English](README.en.md) · [Español](README.es.md)
 
 ---
 
-## Inhalt
+## Features
 
-- [Überblick](#überblick)
-- [Funktionen](#funktionen)
-- [Systemanforderungen](#systemanforderungen)
-- [Schnellstart](#schnellstart)
-- [Wie der Sync & Merge funktioniert](#wie-der-sync--merge-funktioniert)
-- [Unterstützte Protokolle](#unterstützte-protokolle)
-- [FTP-Zugangsdaten (Android/iOS)](#ftp-zugangsdaten-androidios)
-- [Externe Datenbank auf Android/iOS](#externe-datenbank-auf-androidios)
-- [Sicherheit](#sicherheit)
-- [FTP aus dem Projekt testen](#ftp-aus-dem-projekt-testen)
-- [KeePassXC-Referenz](#keepassxc-referenz)
-- [Weitere Dokumentation](#weitere-dokumentation)
+- **Sync & merge** KeePass/KeePassXC databases via KeePassXC-CLI
+- **Protocols:** FTP, SFTP, SCP (Node.js), SMB (Linux/macOS via smbclient)
+- **Platforms:** Linux, Windows (incl. WSL2), macOS (x86_64)
+- **No lftp** required on Windows – pure Node.js for FTP/SFTP
+- **Mobile:** Use the same FTP credentials in KeePass2Android, Strongbox, etc.
 
 ---
 
-## Überblick
+## Installation
 
-KeePass Sync ist ein **CLI-Tool**, das deine **KeePass / KeePassXC `.kdbx`‑Datenbank** automatisch zwischen Geräten synchron hält:
-
-- zentrale Datenbank auf **FTP/SFTP/SMB/SCP** (z. B. eigener Server oder NAS),
-- automatisches **Merge** der Änderungen mit `keepassxc-cli`,
-- funktioniert mit Desktop (KeePassXC) und mobilen Apps (z. B. KeePass2Android, Strongbox).
-
-Suchwörter / Keywords für dich und Google: `KeePass Sync`, `KeePassXC`, `kdbx`, `FTP`, `SFTP`, `password manager`, `merge`, `Android`, `iOS`, `KeePass2Android`, `Strongbox`.
-
----
-
-## Funktionen
-
-- **Sync & Merge**: Lokale und entfernte DB werden mit `keepassxc-cli merge -s ... --same-credentials` zusammengeführt.
-- **Mehrere Protokolle**: FTP, SFTP, SMB, SCP (Konfiguration über `config.json`).
-- **Retry & Logging**: konfigurierbare Wiederholungen und Logs.
-- **Cross‑Plattform**: Linux, Windows (inkl. WSL2), macOS (x86_64) – ein gemeinsames Node.js‑Script.
-- **Mobile‑freundlich**: ideal in Kombination mit KeePass‑Apps, die FTP/SFTP unterstützen.
-
----
-
-## Systemanforderungen
-
-- **Node.js**: Version **18 oder neuer** (`"engines": { "node": ">=18.0.0" }`).
-- **KeePassXC** mit `keepassxc-cli` im `PATH`.
-- Für SMB: `smbclient` (Linux/macOS).  
-- Für SCP/SFTP: Standard‑SSH‑Tools, Node‑Libraries werden mit `npm install` installiert.
-
----
-
-## Schnellstart
+### From npm (recommended)
 
 ```bash
-# 1. Abhängigkeiten installieren
-npm install
-
-# 2. Konfiguration (config.json anlegen)
-cp config.example.json config.json
-# config.json bearbeiten: FTP/SFTP-Zugang, lokale Pfade, KeePass-Master-Passwort
-
-# 3. Sync ausführen
-npm run sync
-# oder
-node sync.js
-
-# Verbindung testen (ohne Sync)
-node sync.js --test
-
-# Status anzeigen
-node sync.js --status
+npm install -g keepass-sync
+# or locally: npm install keepass-sync
 ```
 
-Unter Linux/macOS kannst du zusätzlich die Wrapper nutzen: `./linux/sync_ftp.sh` bzw. `./mac/sync_ftp.sh`.  
-Unter Windows: `windows\sync_ftp.bat` oder PowerShell `./windows/sync_ftp.ps1`.
+### From source
+
+```bash
+git clone https://github.com/benjarogit/keepass-sync.git
+cd keepass-sync
+npm install
+```
+
+**Requirements:** Node.js 18+, KeePassXC (with `keepassxc-cli` in PATH)
 
 ---
 
-## Wie der Sync & Merge funktioniert
+## Quick Start
 
-1. **Backup** der lokalen Datenbank wird erstellt.
-2. **Download** der Datenbank vom Server (FTP/SFTP/SMB/SCP) in eine temporäre Datei.
-3. **Merge** mit KeePassXC‑CLI: lokale und heruntergeladene DB werden zusammengeführt (`keepassxc-cli merge -s … --same-credentials`).
-4. **Upload** der gemergten lokalen Datenbank zurück auf den Server.
+```bash
+# 1. Create config
+cp config.example.json config.json
+# Edit config.json: FTP/SFTP access, local paths, KeePass master password
 
-So ist die Datei auf dem Server immer aktuell. Wenn du auf einem anderen Gerät (z. B. Handy) die gleiche DB öffnest und änderst, lädt die App die aktuelle Version; beim nächsten Sync am PC wird wieder gemerged.
+# 2. Run sync
+keepass-sync
+# or: npm run sync / node sync.js
 
----
+# Test connection (no sync)
+keepass-sync --test
 
-## Unterstützte Protokolle
+# Status
+keepass-sync --status
+```
 
-| Typ    | Port (typisch) | Hinweis |
-|--------|----------------|---------|
-| **FTP**  | 21             | Über Node (`basic-ftp`), kein `lftp` nötig |
-| **SFTP** | 22             | Über Node (`ssh2-sftp-client`) |
-| **SCP**  | 22             | Wie SFTP (SSH‑basiert) |
-| **SMB**  | —              | Linux/macOS: `smbclient` erforderlich; Windows: FTP/SFTP empfohlen |
-
----
-
-## FTP-Zugangsdaten (Android/iOS)
-
-In vielen KeePass‑Apps (z. B. KeePass2Android, Strongbox) kannst du eine **externe Datenbank** per FTP/SFTP hinzufügen. Verwende die gleichen Werte wie in der `config.json` von KeePass Sync, damit alle Geräte dieselbe Datei nutzen.
-
-Im Dialog **„FTP-Zugangsdaten eingeben:“** (oder vergleichbar) trägst du ein:
-
-| Feld | Bedeutung | Beispiel / config.json |
-|------|-----------|-------------------------|
-| **Host** | Server-Adresse (IP oder Hostname) | `192.168.0.1` oder `ftp.example.com` → `ftp.host` |
-| **Port** | 21 (FTP), 22 (SFTP), 990 (FTPS implizit) | → `ftp.port` |
-| **Verschlüsselung** | Keine (FTP), FTPES, FTPS oder SFTP | SFTP/FTPES empfohlen → `ftp.type`: `"sftp"` oder `"ftp"` |
-| **Benutzername** | FTP-/SFTP-Login | → `ftp.user` |
-| **Passwort** | FTP-/SFTP-Passwort | → `ftp.password` |
-| **Startverzeichnis (optional)** | Pfad zum Ordner, in dem die .kdbx liegt | z. B. `/` oder `/backups`; entspricht dem Verzeichnisteil von `ftp.remotePath` |
-
-Die **Datei** der Datenbank ist der Dateiname aus `ftp.remotePath` (z. B. `keepass_passwords.kdbx`).  
-Ausführliche Anleitung für KeePassXC: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted).
+**Wrappers:** `./linux/sync_ftp.sh` · `./mac/sync_ftp.sh` · `windows\sync_ftp.bat` · `.\windows\sync_ftp.ps1`
 
 ---
 
-## Externe Datenbank auf Android/iOS
+## How Sync & Merge Works
 
-1. KeePass‑App installieren (z. B. KeePass2Android, Strongbox).
-2. **Datenbank hinzufügen** → **Über Netzwerk** / **FTP** / **SFTP**.
-3. Dieselben Zugangsdaten wie in der `config.json` eintragen (Host, Port, Verschlüsselung, Benutzer, Passwort, Startverzeichnis).
-4. Beim Öffnen lädt die App die aktuelle Datei vom Server; nach Änderungen ggf. „Speichern“/Upload nutzen (app‑abhängig).  
-   Mit KeePass Sync auf dem PC bleibt die Server‑Datei durch regelmäßigen Sync/Merge aktuell.
+1. **Backup** local database
+2. **Download** database from server (FTP/SFTP/SMB/SCP)
+3. **Merge** with KeePassXC-CLI (`keepassxc-cli merge -s … --same-credentials`)
+4. **Upload** merged database back to server
 
----
-
-## Sicherheit
-
-- **Passwörter** werden **nicht** in Logs geschrieben.
-- **Master‑Passwort:** Optional über Umgebungsvariable setzen: `KEEPASS_DB_PASSWORD=dein_passwort node sync.js` (überschreibt `config.json`).
-- **config.json** enthält Zugangsdaten im Klartext → Rechte einschränken, z. B. `chmod 600 config.json` unter Linux/macOS.
-- **config.json** steht in `.gitignore` und wird nicht ins Repo eingecheckt.
+The server file stays current; open the same DB on mobile with the same FTP credentials.
 
 ---
 
-## FTP aus dem Projekt testen
+## Configuration
 
-Mit den Zugangsdaten aus `config.json` kannst du die Verbindung aus dem Workspace testen:
+Edit `config.json`:
+
+| Field | Meaning |
+|-------|---------|
+| `ftp.host` | Server (IP or hostname) |
+| `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
+| `ftp.type` | `ftp`, `sftp`, `scp`, or `smb` |
+| `ftp.user` | Username |
+| `ftp.password` | Password |
+| `ftp.remotePath` | Full path to .kdbx on server |
+| `keepass.databasePassword` | KeePass master password |
+
+**Optional:** `KEEPASS_DB_PASSWORD` env var overrides the master password (safer than storing it in config).
+
+---
+
+## FTP Credentials (e.g. for Android/iOS Apps)
+
+Use the same values as in `config.json` when adding an external database in KeePass2Android, Strongbox, etc.:
+
+| App field | config.json |
+|-----------|-------------|
+| Host | `ftp.host` |
+| Port | `ftp.port` |
+| Encryption | `ftp.type` (`sftp` or `ftp`) |
+| Username | `ftp.user` |
+| Password | `ftp.password` |
+| Start directory | Directory part of `ftp.remotePath` |
+
+More: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
+
+---
+
+## Security
+
+- Passwords are not logged
+- Use `KEEPASS_DB_PASSWORD` env var instead of storing the master password in config
+- Restrict `config.json` permissions: `chmod 600 config.json` (Linux/macOS)
+- `config.json` is in `.gitignore` and never committed
+
+---
+
+## Open FTP from Project
+
+List the configured FTP/SFTP directory:
 
 ```bash
 npm run open-ftp
-# oder
-node scripts/open_ftp.js
-```
-
-Damit wird das konfigurierte FTP/SFTP-Verzeichnis aufgelistet (kein interaktives Öffnen im Dateimanager).
-
----
-
-## KeePassXC-Referenz
-
-Die KeePassXC‑Quellen liegen als Submodul unter `keepassxc/` (optional). Nach dem Klonen initialisieren mit:
-
-```bash
-git submodule update --init
+# or: node scripts/open_ftp.js
 ```
 
 ---
 
-## Weitere Dokumentation
+## FAQ
 
-- [Installation & Automatisierung](docs/INSTALL.de.md) (DE) · [EN](docs/INSTALL.en.md) · [ES](docs/INSTALL.es.md)
-- [Test-Anleitung](docs/TEST.de.md) (DE) · [EN](docs/TEST.en.md) · [ES](docs/TEST.es.md)
+**Do I need an FTP server?** Yes – you need FTP, SFTP, SMB, or SCP access to a server where the .kdbx file is stored.
+
+**How does merge work?** KeePassXC-CLI merges the downloaded file into your local copy; conflicting entries are combined. Both files use the same master password.
+
+**Does it work on Windows without WSL?** Yes. Node.js handles FTP/SFTP natively; no lftp or WSL needed.
 
 ---
 
-**Version:** 2.0.0 · **Lizenz:** MIT · [GitHub](https://github.com/benjarogit/keepass-sync)
+## Development
+
+- **Run tests:** `npm test`
+- **KeePassXC reference:** `keepassxc/` submodule – `git submodule update --init`
+
+---
+
+## Releases & Versioning
+
+Version in `package.json` and Git tags (e.g. `v2.0.0`) stay in sync. npm package and GitHub releases match.
+
+---
+
+## Documentation
+
+- [Installation & Automation](docs/INSTALL.de.md) (DE) · [EN](docs/INSTALL.en.md) · [ES](docs/INSTALL.es.md)
+- [Testing](docs/TEST.de.md) (DE) · [EN](docs/TEST.en.md) · [ES](docs/TEST.es.md)
+
+---
+
+**Version:** 2.0.0 · **License:** MIT · [GitHub](https://github.com/benjarogit/keepass-sync)
