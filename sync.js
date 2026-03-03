@@ -624,7 +624,7 @@ async function main() {
   checkPlatform();
 
   if (flags.version) {
-    console.log('KeePass Sync 2.0.1 (Node.js)');
+    console.log('KeePass Sync 2.0.2 (Node.js)');
     return;
   }
   if (flags.help) {
