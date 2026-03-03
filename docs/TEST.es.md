@@ -4,7 +4,7 @@
 
 **🌍 Languages | Idiomas | Sprachen: [🇩🇪 Deutsch](TEST.de.md) | [🇬🇧 English](TEST.en.md) | [🇪🇸 Español](TEST.es.md)**
 
-[← Zurück zur Hauptdokumentation](README.es.md) • [Installationsanleitung](docs/INSTALL.es.md)
+[← Zurück zur Hauptdokumentation](../README.es.md) • [Installationsanleitung](INSTALL.es.md)
 
 </div>
 
@@ -16,13 +16,13 @@
 ### a) Probar Wrapper
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Ejecutar wrapper directamente
 node sync.js
 
 # O como ejecutable (si se hizo ejecutable)
-./sync.py
+node sync.js
 ```
 
 **Qué sucede:**
@@ -33,7 +33,7 @@ node sync.js
 ### b) Probar Archivo .sh Directamente (Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Ejecutar directamente
 ./linux/sync_ftp.sh
@@ -109,7 +109,7 @@ En errores verás mensajes de error detallados en el registro.
 
 <div align="center">
 
-**← [Zurück zur Hauptdokumentation](README.md) • [Installationsanleitung](INSTALL.md) →**
+**← [Zurück zur Hauptdokumentation](../README.es.md) • [Installationsanleitung](INSTALL.es.md) →**
 
 ---
 
@@ -117,7 +117,7 @@ En errores verás mensajes de error detallados en el registro.
 
 **🌍 Languages | Idiomas | Sprachen: [🇩🇪 Deutsch](#-deutsch) | [🇬🇧 English](#-english) | [🇪🇸 Español](#-español)**
 
-[← Zurück zur Hauptdokumentation](README.es.md) • [Installationsanleitung](docs/INSTALL.es.md)
+[← Zurück zur Hauptdokumentation](../README.es.md) • [Installationsanleitung](INSTALL.es.md)
 
 </div>
 
@@ -128,13 +128,13 @@ En errores verás mensajes de error detallados en el registro.
 ### a) Wrapper testen
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Wrapper direkt ausführen
 node sync.js
 
 # Oder als ausführbare Datei (wenn ausführbar gemacht)
-./sync.py
+node sync.js
 ```
 
 **Was passiert:**
@@ -145,7 +145,7 @@ node sync.js
 ### b) .sh Datei direkt testen (Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Direkt ausführen
 ./linux/sync_ftp.sh
@@ -308,13 +308,13 @@ node sync.js --watch
 ### a) Test Wrapper
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Run wrapper directly
 node sync.js
 
 # Or as executable (if made executable)
-./sync.py
+node sync.js
 ```
 
 **What happens:**
@@ -325,7 +325,7 @@ node sync.js
 ### b) Test .sh File Directly (Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Execute directly
 ./linux/sync_ftp.sh
@@ -394,13 +394,13 @@ On errors you'll see detailed error messages in the log.
 ### a) Probar Wrapper
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Ejecutar wrapper directamente
 node sync.js
 
 # O como ejecutable (si se hizo ejecutable)
-./sync.py
+node sync.js
 ```
 
 **Qué sucede:**
@@ -411,7 +411,7 @@ node sync.js
 ### b) Probar Archivo .sh Directamente (Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 
 # Ejecutar directamente
 ./linux/sync_ftp.sh
@@ -487,6 +487,6 @@ En errores verás mensajes de error detallados en el registro.
 
 <div align="center">
 
-**← [Zurück zur Hauptdokumentation](README.es.md) • [Installationsanleitung](docs/INSTALL.es.md) →**
+**← [Zurück zur Hauptdokumentation](../README.es.md) • [Installationsanleitung](INSTALL.es.md) →**
 
 </div>
