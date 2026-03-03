@@ -18,8 +18,7 @@
 ## Features
 
 - **Sync & merge** KeePass/KeePassXC databases via KeePassXC-CLI
-- **Recommended:** Google Drive (rclone) for reliable cloud sync and best mobile app compatibility – avoids FTP/SFTP issues with KeePass2Android
-- **Protocols:** FTP, SFTP, SCP (Node.js), SMB (Linux/macOS via smbclient), Google Drive (rclone)
+- **Protocols (recommended order):** 1. Google Drive (rclone), 2. SFTP (prefer over FTP when using FTP protocols), 3. FTP, SMB, SCP
 - **Platforms:** Linux, Windows (incl. WSL2), macOS (x86_64)
 - **No lftp** required on Windows – pure Node.js for FTP/SFTP
 - **Mobile:** Use the same credentials in KeePass2Android, Strongbox, etc.
@@ -96,28 +95,28 @@ The server file stays current; open the same DB on mobile with the same FTP cred
 
 ---
 
-## Android: Externe Datenbank per FTP einrichten
+## Android: Externe Datenbank einrichten
 
-In KeePass2Android, Strongbox oder ähnlichen Apps kannst du die KeePass-Datenbank direkt vom FTP-Server öffnen. Nutze dieselben Werte wie in `config.json`:
+### Google Drive (empfohlen)
 
-Wenn die App nach **FTP-Zugangsdaten** fragt (Dialog „FTP-Zugangsdaten eingeben:“), trage folgendes ein:
+Bei `type: "rclone"` die Datenbank in KeePass2Android direkt aus **Google Drive** öffnen (eingebaute Unterstützung). Dieselbe Datei wie in `remotePath` wählen, z.B. im Ordner `KeePass/keepass_passwords.kdbx`. Keine FTP-Konfiguration nötig.
 
-| App-Feld | Was eingeben | Beispiel |
-|----------|--------------|----------|
-| **Host** | `ftp.host` aus config.json (IP oder Hostname) | `192.168.0.1` oder `ftp.meinserver.de` |
-| **Port** | `ftp.port` aus config.json | `21` (FTP) oder `22` (SFTP) |
-| **Verschlüsselung** | FTP oder SFTP wählen (entspricht `ftp.type`) | „Keine Verschlüsselung (FTP)“ oder „SFTP“ |
-| **Benutzername** | `ftp.user` | dein FTP-Benutzername |
-| **Passwort** | `ftp.password` | dein FTP-Passwort |
-| **Startverzeichnis (optional)** | Verzeichnisteil von `ftp.remotePath` (ohne Dateiname) | `/` oder `/home/user/` |
+### FTP/SFTP
 
-**Hinweis:** Wenn `ftp.remotePath` z.B. `/home/user/keepass.kdbx` ist, gib als Startverzeichnis `/home/user` ein. Die App zeigt dann die Dateien an – wähle `keepass.kdbx`.
+In KeePass2Android, Strongbox oder ähnlichen Apps dieselben Werte wie in `config.json` nutzen: Host, Port, Benutzer, Passwort, Startverzeichnis. **SFTP vorziehen** (Passwörter verschlüsselt; weniger Kompatibilitätsprobleme als mit FTP).
 
-**Sicherheit:** SFTP ist FTP vorzuziehen (Passwörter verschlüsselt).
+| App-Feld | Was eingeben |
+|----------|--------------|
+| **Host** | `ftp.host` |
+| **Port** | `21` (FTP) oder `22` (SFTP) |
+| **Verschlüsselung** | FTP oder SFTP (`ftp.type`) |
+| **Benutzername** | `ftp.user` |
+| **Passwort** | `ftp.password` |
+| **Startverzeichnis** | Verzeichnisteil von `ftp.remotePath` |
 
-**Compatibility:** Use KDBX 3.1 format for best compatibility with KeePass2Android and `keepassxc-cli`. In KeePassXC: Database settings → save as KDBX 3.1 if needed. In KeePass2Android: properly close/save the database after changes to avoid corruption on FTP sync.
+**Tipp:** Bei Problemen mit KeePass2Android und FTP: In KeePassXC auf KDBX 3.1 speichern. Mit Google Drive meist nicht nötig.
 
-More: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
+[KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
 
 ---
 
@@ -148,7 +147,7 @@ npm run open-ftp
 
 **How does merge work?** KeePassXC-CLI merges the downloaded file into your local copy; conflicting entries are combined. Both files use the same master password. **Merge only – no overwrite.** Both sources are combined; data is never replaced blindly.
 
-**What if the merge fails?** Neither your local database nor the server file is modified. Check that both use KDBX 3.1 format for best compatibility with KeePass2Android and `keepassxc-cli`. Backups in `backups/` remain safe.
+**What if the merge fails?** Neither your local database nor the server file is modified. See Android section for compatibility tips (KDBX format, Google Drive vs FTP). Backups in `backups/` remain safe.
 
 **Does it work on Windows without WSL?** Yes. Node.js handles FTP/SFTP natively; no lftp or WSL needed.
 
