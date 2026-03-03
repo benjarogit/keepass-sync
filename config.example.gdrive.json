@@ -2,7 +2,7 @@
   "ftp": {
     "type": "rclone",
     "remotePath": "gdrive:KeePass/keepass_passwords.kdbx",
-    "comment": "rclone/Google Drive: Run 'rclone config' first to create 'gdrive' remote. remotePath = 'gdrive:path/to/file.kdbx'"
+    "comment": "rclone/Google Drive (recommended config): Run 'rclone config' first to create 'gdrive' remote. remotePath = 'gdrive:path/to/file.kdbx'"
   },
   "local": {
     "localPath": "keepass_passwords.kdbx",

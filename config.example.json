@@ -6,7 +6,7 @@
     "password": "dein-ftp-passwort",
     "type": "ftp",
     "remotePath": "/keepass_passwords.kdbx",
-    "comment": "type: ftp|sftp|smb|scp|rclone|gdrive. port: 21 (FTP), 22 (SFTP/SCP). remotePath = directory + filename (for mobile apps: start dir = directory of .kdbx)"
+    "comment": "type: rclone|gdrive (recommended), sftp (prefer over ftp), ftp|smb|scp. port: 21 (FTP), 22 (SFTP/SCP). remotePath = directory + filename"
   },
   "local": {
     "localPath": "keepass_passwords.kdbx",
