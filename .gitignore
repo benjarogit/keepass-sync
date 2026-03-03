@@ -77,3 +77,13 @@ RELEASE_TEMPLATE.md
 **/check_versions.txt
 **/check_*.txt
 
+# Cursor/IDE internals (not for end users)
+CLAUDE.md
+.cursor/
+.cursorules
+**/.cursor/
+agent-transcripts/
+**/agent-transcripts/
+**/*.plan.md
+keepass-sync.code-workspace
+
