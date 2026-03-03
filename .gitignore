@@ -26,6 +26,9 @@ temp_*
 tmp/
 *.tmp
 
+# Node.js
+node_modules/
+
 # Python (überall im Projekt)
 __pycache__/
 **/__pycache__/

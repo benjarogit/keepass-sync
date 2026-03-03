@@ -7,27 +7,19 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 SYNC_SCRIPT="$BASE_DIR/linux/sync_ftp.sh"
-SYNC_SCRIPT_PY="$BASE_DIR/python/sync_ftp.py"
+SYNC_JS="$BASE_DIR/sync.js"
 
 echo "=== KeePass Sync - Linux Installation ==="
 echo ""
 
-# Prüfe ob Script existiert
-if [ ! -f "$SYNC_SCRIPT" ] && [ ! -f "$SYNC_SCRIPT_PY" ]; then
-    echo "Fehler: Sync-Script nicht gefunden!"
+if [ ! -f "$SYNC_SCRIPT" ] || [ ! -f "$SYNC_JS" ]; then
+    echo "Fehler: sync.js oder linux/sync_ftp.sh nicht gefunden!"
     exit 1
 fi
 
-# Welche Sync-Datei verwenden?
-if [ -f "$SYNC_SCRIPT_PY" ]; then
-    EXEC_SCRIPT="$SYNC_SCRIPT_PY"
-    EXEC_CMD="python3"
-else
-    EXEC_SCRIPT="$SYNC_SCRIPT"
-    EXEC_CMD="bash"
-fi
-
-echo "Verwende: $EXEC_CMD $EXEC_SCRIPT"
+EXEC_SCRIPT="$SYNC_SCRIPT"
+EXEC_CMD="bash"
+echo "Verwende: $EXEC_CMD $EXEC_SCRIPT (ruft node sync.js auf)"
 echo ""
 
 # Systemd Service installieren
@@ -96,8 +88,8 @@ IDLE_TIME_MIN=$((IDLE_TIME / 60000))
 # Wenn System seit mindestens 5 Minuten idle ist
 if [ $IDLE_TIME_MIN -ge 5 ]; then
     cd "$BASE_DIR"
-    if [ -f "python/sync_ftp.py" ]; then
-        python3 python/sync_ftp.py >> "$BASE_DIR/sync_idle.log" 2>&1
+    if [ -f "sync.js" ]; then
+        node sync.js >> "$BASE_DIR/sync_idle.log" 2>&1
     elif [ -f "linux/sync_ftp.sh" ]; then
         bash linux/sync_ftp.sh >> "$BASE_DIR/sync_idle.log" 2>&1
     fi

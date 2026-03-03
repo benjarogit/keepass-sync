@@ -1,11 +1,12 @@
 {
   "ftp": {
     "host": "dein-server.com",
+    "port": 21,
     "user": "dein-benutzername",
     "password": "dein-ftp-passwort",
     "type": "ftp",
     "remotePath": "/keepass_passwords.kdbx",
-    "comment": "Protokoll-Optionen: 'ftp' (Standard), 'sftp', 'smb', 'scp'"
+    "comment": "type: ftp|sftp|smb|scp. port: 21 (FTP), 22 (SFTP/SCP). remotePath = Startverzeichnis + Dateiname (für mobile Apps: Startverzeichnis = Verzeichnis der .kdbx)"
   },
   "local": {
     "localPath": "keepass_passwords.kdbx",

@@ -1,0 +1,33 @@
+{
+  "name": "keepass-sync",
+  "version": "2.0.0",
+  "description": "KeePass database sync & merge via FTP/SFTP/SMB/SCP (Linux, Windows, WSL2, macOS)",
+  "main": "sync.js",
+  "bin": {
+    "keepass-sync": "./sync.js"
+  },
+  "scripts": {
+    "sync": "node sync.js",
+    "test": "node sync.js --test",
+    "status": "node sync.js --status",
+    "open-ftp": "node scripts/open_ftp.js"
+  },
+  "keywords": [
+    "keepass",
+    "keepassxc",
+    "sync",
+    "merge",
+    "ftp",
+    "sftp",
+    "password-manager"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.5",
+    "ssh2-sftp-client": "^11.0.0"
+  }
+}
