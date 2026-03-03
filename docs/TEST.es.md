@@ -93,8 +93,7 @@ En errores verás mensajes de error detallados en el registro.
 - O: `sudo apt install keepassxc` (Debian/Ubuntu)
 
 **Problema: "Cliente FTP no encontrado"**
-- Instala lftp: `sudo pacman -S lftp` (Arch/CachyOS)
-- O: `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: Node.js – sin herramientas adicionales
 
 **Problema: "Cliente SMB no encontrado"** (solo para SMB/CIFS)
 - Instala smbclient: `sudo pacman -S samba` (Arch/CachyOS)
@@ -246,22 +245,18 @@ Bei Fehlern siehst du detaillierte Fehlermeldungen im Log.
 - Oder: `sudo apt install keepassxc` (Debian/Ubuntu)
 
 **Problem: "FTP-Client nicht gefunden"**
-- Installiere lftp: `sudo pacman -S lftp` (Arch/CachyOS)
-- Oder: `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: Node.js – keine zusätzlichen Tools
 
 **Problem: "SMB-Client nicht gefunden"** (nur bei SMB/CIFS)
 - Installiere smbclient: `sudo pacman -S samba` (Arch/CachyOS)
 - Oder: `sudo apt install samba-common` (Debian/Ubuntu)
-- Windows: Installiere Python-Library: `pip install pysmb`
+- Windows: FTP/SFTP via Node.js
 
 **Problem: "SCP-Tool nicht gefunden"** (nur bei SCP)
 - Installiere sshpass: `sudo pacman -S sshpass` (Arch/CachyOS)
 - Oder: `sudo apt install sshpass` (Debian/Ubuntu)
-- Windows: Installiere Python-Library: `pip install paramiko`
 
 **Problem: "Datei-Überwachung funktioniert nicht"** (nur bei --watch)
-- Linux: Installiere `pip install pyinotify`
-- macOS/Windows: Installiere `pip install watchdog`
 - Fallback: Polling-Modus wird automatisch verwendet
 
 ### Weitere CLI-Optionen
@@ -305,8 +300,6 @@ node sync.js --watch
 - Beenden mit `Ctrl+C`
 
 **Hinweis:** Installiere zuerst die benötigte Library:
-- Linux: `pip install pyinotify`
-- macOS/Windows: `pip install watchdog`
 
 ---
 
@@ -392,8 +385,7 @@ On errors you'll see detailed error messages in the log.
 - Or: `sudo apt install keepassxc` (Debian/Ubuntu)
 
 **Issue: "FTP client not found"**
-- Install lftp: `sudo pacman -S lftp` (Arch/CachyOS)
-- Or: `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: Node.js – no extra tools
 
 ---
 
@@ -479,8 +471,7 @@ En errores verás mensajes de error detallados en el registro.
 - O: `sudo apt install keepassxc` (Debian/Ubuntu)
 
 **Problema: "Cliente FTP no encontrado"**
-- Instala lftp: `sudo pacman -S lftp` (Arch/CachyOS)
-- O: `sudo apt install lftp` (Debian/Ubuntu)
+- FTP/SFTP: Node.js – sin herramientas adicionales
 
 **Problema: "Cliente SMB no encontrado"** (solo para SMB/CIFS)
 - Instala smbclient: `sudo pacman -S samba` (Arch/CachyOS)
