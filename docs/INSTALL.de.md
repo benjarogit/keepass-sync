@@ -4,7 +4,7 @@
 
 **🌍 Languages | Idiomas | Sprachen: [🇩🇪 Deutsch](#-deutsch) | [🇬🇧 English](#-english) | [🇪🇸 Español](#-español)**
 
-[← Zurück zur Hauptdokumentation](README.de.md) • [Test-Anleitung](docs/TEST.de.md)
+[← Zurück zur Hauptdokumentation](../README.de.md) • [Test-Anleitung](TEST.de.md)
 
 </div>
 
@@ -301,7 +301,7 @@ Verwende `ioreg` für Leerlauf-Erkennung (komplexer, LaunchAgent mit StartInterv
 
 <div align="center">
 
-**← [Zurück zur Hauptdokumentation](README.md) • [Test-Anleitung](TEST.md) →**
+**← [Zurück zur Hauptdokumentation](../README.de.md) • [Test-Anleitung](TEST.de.md) →**
 
 ---
 
@@ -309,7 +309,7 @@ Verwende `ioreg` für Leerlauf-Erkennung (komplexer, LaunchAgent mit StartInterv
 
 **🌍 Languages | Idiomas | Sprachen: [🇩🇪 Deutsch](#-deutsch) | [🇬🇧 English](#-english) | [🇪🇸 Español](#-español)**
 
-[← Zurück zur Hauptdokumentation](README.de.md) • [Test-Anleitung](docs/TEST.de.md)
+[← Zurück zur Hauptdokumentation](../README.de.md) • [Test-Anleitung](TEST.de.md)
 
 </div>
 
@@ -605,7 +605,7 @@ Verwende `ioreg` für Leerlauf-Erkennung (komplexer, LaunchAgent mit StartInterv
 
 <div align="center">
 
-**← [Zurück zur Hauptdokumentation](README.de.md) • [Test-Anleitung](docs/TEST.de.md) →**
+**← [Zurück zur Hauptdokumentation](../README.de.md) • [Test-Anleitung](TEST.de.md) →**
 
 </div>
 
@@ -864,7 +864,7 @@ Use `ioreg` for idle detection (more complex, LaunchAgent with StartInterval is 
 
 <div align="center">
 
-**← [Back to Main Documentation](README.de.md) • [Test Guide](docs/TEST.de.md) →**
+**← [Back to Main Documentation](../README.de.md) • [Test Guide](TEST.de.md) →**
 
 </div>
 
@@ -1125,6 +1125,6 @@ Usar `ioreg` para detección de reposo (más complejo, LaunchAgent con StartInte
 
 <div align="center">
 
-**← [Volver a Documentación Principal](README.de.md) • [Guía de Pruebas](docs/TEST.de.md) →**
+**← [Volver a Documentación Principal](../README.de.md) • [Guía de Pruebas](TEST.de.md) →**
 
 </div>
