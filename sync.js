@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /**
- * KeePass Sync - Node.js
+ * KeePass Sync - Node.js CLI
  * Sync & merge KeePass/KeePassXC database via FTP, SFTP, SMB, or SCP.
  * Platforms: Linux, Windows, WSL2, macOS (x86_64).
+ *
+ * Copyright (c) 2026 Sunny C.
  */
 
 const fs = require('fs');
