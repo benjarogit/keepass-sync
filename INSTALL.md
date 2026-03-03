@@ -46,7 +46,7 @@ cp config.example.json config.json
 ## 🚀 Schnellinstallation (Empfohlen für Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 ./linux/install.sh
 ```
 
@@ -344,7 +344,7 @@ The installer:
 ## 🚀 Quick Installation (Recommended for Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 ./linux/install.sh
 ```
 
@@ -607,7 +607,7 @@ El instalador:
 ## 🚀 Instalación Rápida (Recomendado para Linux)
 
 ```bash
-cd "/mnt/ssd2/Backup (SSD2)/Tools/Keepass Sync"
+cd /pfad/zum/keepass-sync
 ./linux/install.sh
 ```
 
