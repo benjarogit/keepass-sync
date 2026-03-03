@@ -28,7 +28,7 @@ node sync.js
 **Was passiert:**
 - Wrapper erkennt automatisch das Betriebssystem (Linux/Windows/macOS)
 - Ruft automatisch `sync.js` auf (bevorzugt)
-- Falls Python nicht verfügbar: Fallback zu plattformspezifischem Script
+- Wrapper prüft Node.js und führt node sync.js aus
 
 ### b) .sh Datei direkt testen (Linux)
 
@@ -43,9 +43,9 @@ bash linux/sync_ftp.sh
 ```
 
 **Was passiert:**
-- Script prüft ob Python3 verfügbar ist
+- Script prüft ob Node.js verfügbar ist
 - Ruft automatisch `sync.js` auf
-- Falls Python nicht gefunden: Fehlermeldung
+- Falls Node.js nicht gefunden: Fehlermeldung
 
 ### Verbindung testen (ohne Sync)
 
@@ -139,12 +139,12 @@ Bei Fehlern siehst du detaillierte Fehlermeldungen im Log.
 **Problem: "SMB-Client nicht gefunden"** (nur bei SMB/CIFS)
 - Installiere smbclient: `sudo pacman -S samba` (Arch/CachyOS)
 - Oder: `sudo apt install samba-common` (Debian/Ubuntu)
-- Windows: Installiere Python-Library: `pip install pysmb`
+- Windows: FTP oder SFTP verwenden (SMB nicht unterstützt)
 
 **Problem: "SCP-Tool nicht gefunden"** (nur bei SCP)
 - Installiere sshpass: `sudo pacman -S sshpass` (Arch/CachyOS)
 - Oder: `sudo apt install sshpass` (Debian/Ubuntu)
-- Windows: Installiere Python-Library: `pip install paramiko`
+- SCP: Wie SFTP über Node.js
 
 **Problem: "Datei-Überwachung funktioniert nicht"** (nur bei --watch)
 - Linux: Installiere `pip install pyinotify`
@@ -226,7 +226,7 @@ node sync.js
 **Was passiert:**
 - Wrapper erkennt automatisch das Betriebssystem (Linux/Windows/macOS)
 - Ruft automatisch `sync.js` auf (bevorzugt)
-- Falls Python nicht verfügbar: Fallback zu plattformspezifischem Script
+- Wrapper prüft Node.js und führt node sync.js aus
 
 ### b) .sh Datei direkt testen (Linux)
 
@@ -241,9 +241,9 @@ bash linux/sync_ftp.sh
 ```
 
 **Was passiert:**
-- Script prüft ob Python3 verfügbar ist
+- Script prüft ob Node.js verfügbar ist
 - Ruft automatisch `sync.js` auf
-- Falls Python nicht gefunden: Fehlermeldung
+- Falls Node.js nicht gefunden: Fehlermeldung
 
 ### Verbindung testen (ohne Sync)
 
@@ -337,12 +337,12 @@ Bei Fehlern siehst du detaillierte Fehlermeldungen im Log.
 **Problem: "SMB-Client nicht gefunden"** (nur bei SMB/CIFS)
 - Installiere smbclient: `sudo pacman -S samba` (Arch/CachyOS)
 - Oder: `sudo apt install samba-common` (Debian/Ubuntu)
-- Windows: Installiere Python-Library: `pip install pysmb`
+- Windows: FTP oder SFTP verwenden (SMB nicht unterstützt)
 
 **Problem: "SCP-Tool nicht gefunden"** (nur bei SCP)
 - Installiere sshpass: `sudo pacman -S sshpass` (Arch/CachyOS)
 - Oder: `sudo apt install sshpass` (Debian/Ubuntu)
-- Windows: Installiere Python-Library: `pip install paramiko`
+- SCP: Wie SFTP über Node.js
 
 **Problem: "Datei-Überwachung funktioniert nicht"** (nur bei --watch)
 - Linux: Installiere `pip install pyinotify`
@@ -412,7 +412,7 @@ node sync.js
 **What happens:**
 - Wrapper automatically detects the operating system (Linux/Windows/macOS)
 - Calls `sync.js` automatically (preferred)
-- If Python not available: Fallback to platform-specific script
+- Wrapper checks Node.js and runs node sync.js
 
 ### b) Test .sh File Directly (Linux)
 
@@ -427,9 +427,9 @@ bash linux/sync_ftp.sh
 ```
 
 **What happens:**
-- Script checks if Python3 is available
+- Script checks if Node.js is available
 - Automatically calls `sync.js`
-- If Python not found: Error message
+- If Node.js not found: Error message
 
 ### Test with Debug Mode
 
@@ -499,7 +499,7 @@ node sync.js
 **Qué sucede:**
 - El wrapper detecta automáticamente el sistema operativo (Linux/Windows/macOS)
 - Llama automáticamente a `sync.js` (preferido)
-- Si Python no está disponible: Fallback a script específico de plataforma
+- Wrapper verifica Node.js y ejecuta node sync.js
 
 ### b) Probar Archivo .sh Directamente (Linux)
 
@@ -514,9 +514,9 @@ bash linux/sync_ftp.sh
 ```
 
 **Qué sucede:**
-- El script verifica si Python3 está disponible
+- El script verifica si Node.js está disponible
 - Llama automáticamente a `sync.js`
-- Si Python no se encuentra: Mensaje de error
+- Si Node.js no se encuentra: Mensaje de error
 
 ### Probar con Modo Debug
 
@@ -570,12 +570,12 @@ En errores verás mensajes de error detallados en el registro.
 **Problema: "Cliente SMB no encontrado"** (solo para SMB/CIFS)
 - Instala smbclient: `sudo pacman -S samba` (Arch/CachyOS)
 - O: `sudo apt install samba-common` (Debian/Ubuntu)
-- Windows: Instala biblioteca Python: `pip install pysmb`
+- Windows: Usar FTP o SFTP (SMB no soportado)
 
 **Problema: "Herramienta SCP no encontrada"** (solo para SCP)
 - Instala sshpass: `sudo pacman -S sshpass` (Arch/CachyOS)
 - O: `sudo apt install sshpass` (Debian/Ubuntu)
-- Windows: Instala biblioteca Python: `pip install paramiko`
+- SCP: Como SFTP vía Node.js
 
 ---
 
