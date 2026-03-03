@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.0.1] – 2026-03-03
+
+### Added
+
+- **Badges** in README (CI, npm, Node, License, Stars, Issues).
+- **npm CLI** preparation: `bin`, keywords, repository, author; `.npmignore` for package exclusions.
+- **Smoke tests** (`scripts/smoke-test.js`): `--help`, `--version`, `--test` with `config.test.json`; `npm test`.
+- **GitHub Actions CI** (`.github/workflows/ci.yml`): Node 18.x and 20.x, `npm ci`, `npm test`.
+- **docs/RELEASING.md**: release workflow, versioning, GitHub description and topics.
+
+### Changed
+
+- **README** restructured: Features, Installation, Quick Start, Konfiguration, FTP/Mobile, Sicherheit, FAQ, Development, Releases.
+- **README.de/en/es**: badges, CLI references (`keepass-sync`).
+- **INSTALL.md** and **docs/INSTALL.\***: fully on Node.js workflow.
+- **TEST.md** and **docs/TEST.\***: examples with `node sync.js` / `keepass-sync`.
+
+### Docs
+
+- **Copyright** "Copyright (c) 2026 Sunny C." in sync.js, open_ftp.js, linux/mac/windows scripts.
+- **JSDoc** comments in sync.js and open_ftp.js.
+
+---
+
 ## [2.0.0] – 2025-03-03
 
 ### Added
