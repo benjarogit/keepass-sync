@@ -1,3 +1,6 @@
 [submodule "keepassxc"]
 	path = keepassxc
 	url = https://github.com/keepassxreboot/keepassxc.git
+[submodule "keepass2android"]
+	path = keepass2android
+	url = https://github.com/PhilippC/keepass2android.git

@@ -6,10 +6,11 @@
     "password": "dein-ftp-passwort",
     "type": "ftp",
     "remotePath": "/keepass_passwords.kdbx",
-    "comment": "type: ftp|sftp|smb|scp. port: 21 (FTP), 22 (SFTP/SCP). remotePath = Startverzeichnis + Dateiname (für mobile Apps: Startverzeichnis = Verzeichnis der .kdbx)"
+    "comment": "type: ftp|sftp|smb|scp|rclone|gdrive. port: 21 (FTP), 22 (SFTP/SCP). remotePath = directory + filename (for mobile apps: start dir = directory of .kdbx)"
   },
   "local": {
     "localPath": "keepass_passwords.kdbx",
+    "_comment_localPath": "Absolute path allowed: /path/to/keepass_passwords.kdbx. Must be the same file as opened in KeePassXC.",
     "tempPath": "temp_keepass_passwords.kdbx",
     "backupDir": "backups",
     "maxBackups": 2
@@ -21,7 +22,7 @@
   "settings": {
     "debug": false,
     "language": "de",
-    "comment": "Unterstützte Sprachen: 'de' (Deutsch), 'en' (English), 'es' (Español)",
+    "comment": "Supported languages: 'de', 'en', 'es'",
     "cleanupLogs": true,
     "maxLogAgeDays": 7
   },

@@ -52,10 +52,10 @@ sudo systemctl enable keepass-sync.service
 echo "✓ Systemd Service installiert (läuft bei Herunterfahren)"
 echo ""
 
-# Idle-Detection für Leerlauf
+# Idle detection for system idle
 echo "2. Idle-Detection für Leerlauf..."
 
-# Prüfe ob xprintidle installiert ist
+# Check if xprintidle is installed
 if ! command -v xprintidle &> /dev/null; then
     echo "Installiere xprintidle für Leerlauf-Erkennung..."
     if command -v pacman &> /dev/null; then
@@ -67,26 +67,26 @@ if ! command -v xprintidle &> /dev/null; then
     fi
 fi
 
-# Idle-Script erstellen
+# Create idle script
 IDLE_SCRIPT="$BASE_DIR/linux/idle_sync.sh"
 
 cat > "$IDLE_SCRIPT" <<'IDLE_EOF'
 #!/bin/bash
-# Idle-Sync Script - prüft ob System im Leerlauf ist
+# Idle sync script - checks if system is idle
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-# Prüfe ob X11 läuft
+# Check if X11 is running
 if [ -z "$DISPLAY" ]; then
-    exit 0  # Kein X11, kein Idle-Check möglich
+    exit 0  # No X11, no idle check possible
 fi
 
-# Idle-Zeit in Millisekunden
+# Idle time in milliseconds
 IDLE_TIME=$(xprintidle 2>/dev/null || echo "0")
 IDLE_TIME_MIN=$((IDLE_TIME / 60000))
 
-# Wenn System seit mindestens 5 Minuten idle ist
+# If system has been idle for at least 5 minutes
 if [ $IDLE_TIME_MIN -ge 5 ]; then
     cd "$BASE_DIR"
     if [ -f "sync.js" ]; then
@@ -101,11 +101,11 @@ chmod +x "$IDLE_SCRIPT"
 echo "✓ Idle-Script erstellt: $IDLE_SCRIPT"
 echo ""
 
-# Cron-Job für Idle-Sync
+# Cron job for idle sync
 echo "3. Cron-Job für Leerlauf-Sync (alle 5 Minuten)..."
 CRON_ENTRY="*/5 * * * * $IDLE_SCRIPT"
 
-# Prüfe ob bereits ein Eintrag existiert
+# Check if entry already exists
 if crontab -l 2>/dev/null | grep -q "$IDLE_SCRIPT"; then
     echo "✓ Cron-Job existiert bereits"
 else
@@ -114,7 +114,7 @@ else
 fi
 echo ""
 
-# Zusammenfassung
+# Summary
 echo "=== Installation abgeschlossen! ==="
 echo ""
 echo "Installiert:"

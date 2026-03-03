@@ -1,0 +1,24 @@
+{
+  "ftp": {
+    "type": "rclone",
+    "remotePath": "gdrive:KeePass/keepass_passwords.kdbx",
+    "comment": "rclone/Google Drive: Run 'rclone config' first to create 'gdrive' remote. remotePath = 'gdrive:path/to/file.kdbx'"
+  },
+  "local": {
+    "localPath": "keepass_passwords.kdbx",
+    "_comment_localPath": "Absolute path allowed: /path/to/keepass_passwords.kdbx. Must be the same file as opened in KeePassXC.",
+    "tempPath": "temp_keepass_passwords.kdbx",
+    "backupDir": "backups",
+    "maxBackups": 2
+  },
+  "keepass": {
+    "databasePassword": "DEIN_MASTER_PASSWORT",
+    "keepassXCPath": "keepassxc-cli"
+  },
+  "settings": {
+    "debug": false,
+    "language": "de",
+    "cleanupLogs": true,
+    "maxLogAgeDays": 7
+  }
+}
