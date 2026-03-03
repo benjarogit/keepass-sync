@@ -1,5 +1,6 @@
 # Do not publish to npm
 keepassxc/
+keepass2android/
 config.json
 *.kdbx
 *.log
