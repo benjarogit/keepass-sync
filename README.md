@@ -3,10 +3,11 @@
 [![CI](https://github.com/benjarogit/keepass-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/benjarogit/keepass-sync/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/keepass-sync.svg)](https://www.npmjs.com/package/keepass-sync)
 [![npm downloads](https://img.shields.io/npm/dm/keepass-sync.svg)](https://www.npmjs.com/package/keepass-sync)
-[![Node](https://img.shields.io/node/v/keepass-sync)](https://nodejs.org/)
+[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/github/license/benjarogit/keepass-sync)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/benjarogit/keepass-sync)](https://github.com/benjarogit/keepass-sync/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/benjarogit/keepass-sync)](https://github.com/benjarogit/keepass-sync/issues)
+[![GitHub release](https://img.shields.io/github/v/release/benjarogit/keepass-sync)](https://github.com/benjarogit/keepass-sync/releases)
 
 **Sync and merge your KeePass/KeePassXC password database over FTP, SFTP, SMB, or SCP.** Keeps the remote file up to date; changes on PC or mobile are merged on the next sync.
 
@@ -24,7 +25,10 @@
 
 ---
 
-## Installation
+## Installation & Setup (complete guide)
+
+<details open>
+<summary><strong>1. Installation (npm oder Source)</strong></summary>
 
 ### From npm (recommended)
 
@@ -43,27 +47,58 @@ npm install
 
 **Requirements:** Node.js 18+, KeePassXC (with `keepassxc-cli` in PATH)
 
----
+</details>
 
-## Quick Start
+<details>
+<summary><strong>2. Konfiguration (config.json)</strong></summary>
 
 ```bash
-# 1. Create config
 cp config.example.json config.json
-# Edit config.json: FTP/SFTP access, local paths, KeePass master password
+# config.json bearbeiten – siehe Tabelle unten
+```
 
-# 2. Run sync
-keepass-sync
-# or: npm run sync / node sync.js
+| Field | Bedeutung |
+|-------|-----------|
+| `ftp.host` | Server (IP oder Hostname) |
+| `ftp.port` | 21 (FTP), 22 (SFTP/SCP) |
+| `ftp.type` | `ftp`, `sftp`, `scp` oder `smb` |
+| `ftp.user` | Benutzername |
+| `ftp.password` | Passwort |
+| `ftp.remotePath` | Vollständiger Pfad zur .kdbx auf dem Server |
+| `keepass.databasePassword` | KeePass-Masterpasswort |
 
-# Test connection (no sync)
+**Optional:** `KEEPASS_DB_PASSWORD` Umgebungsvariable überschreibt das Masterpasswort (sicherer als in config.json).
+
+</details>
+
+<details>
+<summary><strong>3. Erster Lauf & Test</strong></summary>
+
+```bash
+# Verbindung testen (ohne Sync)
 keepass-sync --test
+# bzw. npm run sync -- --test oder node sync.js --test
 
-# Status
+# Normale Synchronisation
+keepass-sync
+# bzw. npm run sync oder node sync.js
+
+# Status prüfen
 keepass-sync --status
 ```
 
 **Wrappers:** `./linux/sync_ftp.sh` · `./mac/sync_ftp.sh` · `windows\sync_ftp.bat` · `.\windows\sync_ftp.ps1`
+
+</details>
+
+<details>
+<summary><strong>4. Automatisierung (Systemd, Cron, Task Scheduler)</strong></summary>
+
+Ausführliche Anleitungen mit Systemd, Cron (Linux), Launchd (macOS) und Task Scheduler (Windows):
+
+- [Installation & Automation (DE)](docs/INSTALL.de.md) · [EN](docs/INSTALL.en.md) · [ES](docs/INSTALL.es.md)
+
+</details>
 
 ---
 
@@ -78,9 +113,30 @@ The server file stays current; open the same DB on mobile with the same FTP cred
 
 ---
 
-## Configuration
+## Android: Externe Datenbank per FTP einrichten
 
-Edit `config.json`:
+In KeePass2Android, Strongbox oder ähnlichen Apps kannst du die KeePass-Datenbank direkt vom FTP-Server öffnen. Nutze dieselben Werte wie in `config.json`:
+
+Wenn die App nach **FTP-Zugangsdaten** fragt (Dialog „FTP-Zugangsdaten eingeben:“), trage folgendes ein:
+
+| App-Feld | Was eingeben | Beispiel |
+|----------|--------------|----------|
+| **Host** | `ftp.host` aus config.json (IP oder Hostname) | `192.168.0.1` oder `ftp.meinserver.de` |
+| **Port** | `ftp.port` aus config.json | `21` (FTP) oder `22` (SFTP) |
+| **Verschlüsselung** | FTP oder SFTP wählen (entspricht `ftp.type`) | „Keine Verschlüsselung (FTP)“ oder „SFTP“ |
+| **Benutzername** | `ftp.user` | dein FTP-Benutzername |
+| **Passwort** | `ftp.password` | dein FTP-Passwort |
+| **Startverzeichnis (optional)** | Verzeichnisteil von `ftp.remotePath` (ohne Dateiname) | `/` oder `/home/user/` |
+
+**Hinweis:** Wenn `ftp.remotePath` z.B. `/home/user/keepass.kdbx` ist, gib als Startverzeichnis `/home/user` ein. Die App zeigt dann die Dateien an – wähle `keepass.kdbx`.
+
+**Sicherheit:** SFTP ist FTP vorzuziehen (Passwörter verschlüsselt).
+
+Mehr: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
+
+---
+
+## Configuration (Reference)
 
 | Field | Meaning |
 |-------|---------|
@@ -91,25 +147,6 @@ Edit `config.json`:
 | `ftp.password` | Password |
 | `ftp.remotePath` | Full path to .kdbx on server |
 | `keepass.databasePassword` | KeePass master password |
-
-**Optional:** `KEEPASS_DB_PASSWORD` env var overrides the master password (safer than storing it in config).
-
----
-
-## FTP Credentials (e.g. for Android/iOS Apps)
-
-Use the same values as in `config.json` when adding an external database in KeePass2Android, Strongbox, etc.:
-
-| App field | config.json |
-|-----------|-------------|
-| Host | `ftp.host` |
-| Port | `ftp.port` |
-| Encryption | `ftp.type` (`sftp` or `ftp`) |
-| Username | `ftp.user` |
-| Password | `ftp.password` |
-| Start directory | Directory part of `ftp.remotePath` |
-
-More: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
 
 ---
 
@@ -152,7 +189,7 @@ npm run open-ftp
 
 ## Releases & Versioning
 
-Version in `package.json` and Git tags (e.g. `v2.0.0`) stay in sync. npm package and GitHub releases match.
+Version in `package.json` and Git tags (e.g. `v2.0.1`) stay in sync. npm package and GitHub releases match.
 
 ---
 
@@ -163,4 +200,4 @@ Version in `package.json` and Git tags (e.g. `v2.0.0`) stay in sync. npm package
 
 ---
 
-**Version:** 2.0.0 · **License:** MIT · [GitHub](https://github.com/benjarogit/keepass-sync)
+**Version:** 2.0.1 · **License:** MIT · [GitHub](https://github.com/benjarogit/keepass-sync)
