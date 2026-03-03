@@ -2,6 +2,8 @@
 /**
  * Open FTP/SFTP connection using config.json.
  * Lists remote directory (start path from config) so you can verify access from the workspace.
+ *
+ * Copyright (c) 2026 Sunny C.
  */
 
 const fs = require('fs');
