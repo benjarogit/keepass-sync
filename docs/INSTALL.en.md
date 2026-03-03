@@ -37,7 +37,7 @@ The installer:
 
 ### All Systems
 - KeePassXC installed (with `keepassxc-cli`)
-- Python 3.6+ installed
+- Node.js 18+ installed
 
 ### Protocol-specific Requirements:
 
@@ -49,18 +49,18 @@ The installer:
 
 **SMB/CIFS:**
 - Linux/macOS: Install `smbclient`: `sudo pacman -S samba` or `sudo apt install samba-common`
-- Windows: Native support (optional: `pysmb` Python library)
+- Windows: Use FTP or SFTP (SMB not supported)
 
 **SCP:**
 - Linux/macOS: Install `sshpass`: `sudo pacman -S sshpass` or `sudo apt install sshpass`
-- Windows: `paramiko` Python library: `pip install paramiko`
+- SCP: Same as SFTP via Node.js
 
 ### Linux
-- Optional: Python 3.6+ for cross-platform version
+- Node.js 18+ required
 
 ### Windows
 - PowerShell 5.1+ (pre-installed)
-- Optional: Python 3.6+ for cross-platform version
+- Node.js 18+ required
 
 ### macOS
 - Homebrew (optional but recommended)
@@ -320,22 +320,22 @@ Der Installer:
 
 **SMB/CIFS:**
 - Linux/macOS: `smbclient` installieren: `sudo pacman -S samba` oder `sudo apt install samba-common`
-- Windows: Native Unterstützung (optional: `pysmb` Python-Library)
+- Windows: FTP oder SFTP verwenden (SMB nicht unterstützt)
 
 **SCP:**
 - Linux/macOS: `sshpass` installieren: `sudo pacman -S sshpass` oder `sudo apt install sshpass`
-- Windows: `paramiko` Python-Library: `pip install paramiko`
+- SCP: Wie SFTP über Node.js
 
 **Datei-Überwachung (--watch):**
 - Linux: `pyinotify`: `pip install pyinotify`
 - macOS/Windows: `watchdog`: `pip install watchdog`
 
 ### Linux
-- Optional: Python 3.6+ für Cross-Platform-Version
+- Node.js 18+ erforderlich
 
 ### Windows
 - PowerShell 5.1+ (vorinstalliert)
-- Optional: Python 3.6+ für Cross-Platform-Version
+- Node.js 18+ erforderlich
 
 ### macOS
 - Homebrew (optional, aber empfohlen)
@@ -613,7 +613,7 @@ The installer:
 
 ### All Systems
 - KeePassXC installed (with `keepassxc-cli`)
-- Python 3.6+ installed
+- Node.js 18+ installed
 
 ### Protocol-specific Requirements:
 
@@ -625,18 +625,18 @@ The installer:
 
 **SMB/CIFS:**
 - Linux/macOS: Install `smbclient`: `sudo pacman -S samba` or `sudo apt install samba-common`
-- Windows: Native support (optional: `pysmb` Python library)
+- Windows: Use FTP or SFTP (SMB not supported)
 
 **SCP:**
 - Linux/macOS: Install `sshpass`: `sudo pacman -S sshpass` or `sudo apt install sshpass`
-- Windows: `paramiko` Python library: `pip install paramiko`
+- SCP: Same as SFTP via Node.js
 
 ### Linux
-- Optional: Python 3.6+ for cross-platform version
+- Node.js 18+ required
 
 ### Windows
 - PowerShell 5.1+ (pre-installed)
-- Optional: Python 3.6+ for cross-platform version
+- Node.js 18+ required
 
 ### macOS
 - Homebrew (optional but recommended)
