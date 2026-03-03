@@ -37,7 +37,7 @@ Der Installer:
 
 ### Alle Systeme
 - KeePassXC installiert (mit `keepassxc-cli`)
-- Python 3.6+ installiert
+- Node.js 18+ installiert
 
 ### Protokoll-spezifische Anforderungen:
 
@@ -49,22 +49,22 @@ Der Installer:
 
 **SMB/CIFS:**
 - Linux/macOS: `smbclient` installieren: `sudo pacman -S samba` oder `sudo apt install samba-common`
-- Windows: Native Unterstützung (optional: `pysmb` Python-Library)
+- Windows: FTP oder SFTP verwenden (SMB nicht unterstützt)
 
 **SCP:**
 - Linux/macOS: `sshpass` installieren: `sudo pacman -S sshpass` oder `sudo apt install sshpass`
-- Windows: `paramiko` Python-Library: `pip install paramiko`
+- SCP: Wie SFTP über Node.js
 
 **Datei-Überwachung (--watch):**
 - Linux: `pyinotify`: `pip install pyinotify`
 - macOS/Windows: `watchdog`: `pip install watchdog`
 
 ### Linux
-- Optional: Python 3.6+ für Cross-Platform-Version
+- Node.js 18+ erforderlich
 
 ### Windows
 - PowerShell 5.1+ (vorinstalliert)
-- Optional: Python 3.6+ für Cross-Platform-Version
+- Node.js 18+ erforderlich
 
 ### macOS
 - Homebrew (optional, aber empfohlen)
@@ -350,7 +350,7 @@ Der Installer:
 
 ### Alle Systeme
 - KeePassXC installiert (mit `keepassxc-cli`)
-- Python 3.6+ installiert
+- Node.js 18+ installiert
 
 ### Protokoll-spezifische Anforderungen:
 
@@ -362,22 +362,22 @@ Der Installer:
 
 **SMB/CIFS:**
 - Linux/macOS: `smbclient` installieren: `sudo pacman -S samba` oder `sudo apt install samba-common`
-- Windows: Native Unterstützung (optional: `pysmb` Python-Library)
+- Windows: FTP oder SFTP verwenden (SMB nicht unterstützt)
 
 **SCP:**
 - Linux/macOS: `sshpass` installieren: `sudo pacman -S sshpass` oder `sudo apt install sshpass`
-- Windows: `paramiko` Python-Library: `pip install paramiko`
+- SCP: Wie SFTP über Node.js
 
 **Datei-Überwachung (--watch):**
 - Linux: `pyinotify`: `pip install pyinotify`
 - macOS/Windows: `watchdog`: `pip install watchdog`
 
 ### Linux
-- Optional: Python 3.6+ für Cross-Platform-Version
+- Node.js 18+ erforderlich
 
 ### Windows
 - PowerShell 5.1+ (vorinstalliert)
-- Optional: Python 3.6+ für Cross-Platform-Version
+- Node.js 18+ erforderlich
 
 ### macOS
 - Homebrew (optional, aber empfohlen)
