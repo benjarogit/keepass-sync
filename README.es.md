@@ -1,5 +1,9 @@
 # KeePass Sync (Español)
 
+[![CI](https://github.com/benjarogit/keepass-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/benjarogit/keepass-sync/actions)
+[![npm](https://img.shields.io/npm/v/keepass-sync)](https://www.npmjs.com/package/keepass-sync)
+[![License: MIT](https://img.shields.io/github/license/benjarogit/keepass-sync)](LICENSE)
+
 **Sincroniza y fusiona tu base de datos KeePass/KeePassXC por FTP, SFTP, SMB o SCP.**
 
 Idiomas: [Deutsch](README.de.md) | [English](README.en.md) | [Español](README.es.md)
@@ -24,8 +28,8 @@ npm run sync
 # o: node sync.js
 ```
 
-- Probar conexión: `node sync.js --test`
-- Estado: `node sync.js --status`
+- Probar conexión: `keepass-sync --test` o `node sync.js --test`
+- Estado: `keepass-sync --status` o `node sync.js --status`
 
 En Linux: `./linux/sync_ftp.sh` · En Windows: `windows\sync_ftp.bat` o `windows\sync_ftp.ps1`.
 
