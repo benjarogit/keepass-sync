@@ -22,16 +22,17 @@ Esta guía detallada explica cómo instalar y ejecutar automáticamente el scrip
 Para usuarios sin experiencia, hay un instalador interactivo:
 
 ```bash
-npm install && cp config.example.json config.json
+npm install
+npm run setup
 ```
 
 El instalador:
-- ✅ Detecta automáticamente tu sistema
-- ✅ Muestra especificaciones del sistema
-- ✅ Detecta tu idioma
-- ✅ Te guía a través de la configuración
-- ✅ Soporta todos los protocolos (FTP, SFTP, SMB, SCP)
-- ✅ Crea automáticamente `config.json`
+- ✅ Te permite elegir protocolo: FTP, SFTP, SMB, SCP o **Google Drive (rclone, recomendado)**
+- ✅ Comprueba dependencias (KeePassXC, rclone, smbclient, etc.)
+- ✅ Crea `config.json` desde la plantilla apropiada
+- ✅ Opcionalmente configura ejecución automática (Cron/Programador de tareas/LaunchAgent)
+
+**Google Drive:** Recomendado para mejor compatibilidad con apps móviles. Antes del primer sync: ejecuta `rclone config` para configurar el remote `gdrive`.
 
 ## Requisitos Previos
 
@@ -66,16 +67,17 @@ El instalador:
 
 ---
 
-## 🚀 Instalación Rápida (Recomendado para Linux)
+## 🚀 Ejecución Automática (Scripts de instalación)
 
-```bash
-cd "/pfad/zum/keepass-sync"
-./linux/install.sh
-```
+| Plataforma | Script | Qué configura |
+|------------|--------|---------------|
+| **Linux** | `./linux/install.sh` | Systemd (al apagar) + Cron (reposo cada 5 min) |
+| **Windows** | `.\windows\install.ps1` | Programador de tareas (diario a las 6:00) |
+| **macOS** | `./mac/install.sh` | LaunchAgent (al iniciar sesión + cada hora) |
 
-Este script instala automáticamente:
-- ✅ Servicio Systemd (al apagar)
-- ✅ Tarea Cron para sincronización en reposo (cada 5 minutos)
+**Linux:** `cd "/ruta/a/keepass-sync"` y `./linux/install.sh`  
+**Windows (PowerShell):** `.\windows\install.ps1`  
+**macOS:** `cd "/ruta/a/keepass-sync"` y `./mac/install.sh`
 
 ---
 
@@ -855,16 +857,17 @@ Esta guía detallada explica cómo instalar y ejecutar automáticamente el scrip
 Para usuarios sin experiencia, hay un instalador interactivo:
 
 ```bash
-npm install && cp config.example.json config.json
+npm install
+npm run setup
 ```
 
 El instalador:
-- ✅ Detecta automáticamente tu sistema
-- ✅ Muestra especificaciones del sistema
-- ✅ Detecta tu idioma
-- ✅ Te guía a través de la configuración
-- ✅ Soporta todos los protocolos (FTP, SFTP, SMB, SCP)
-- ✅ Crea automáticamente `config.json`
+- ✅ Te permite elegir protocolo: FTP, SFTP, SMB, SCP o **Google Drive (rclone, recomendado)**
+- ✅ Comprueba dependencias (KeePassXC, rclone, smbclient, etc.)
+- ✅ Crea `config.json` desde la plantilla apropiada
+- ✅ Opcionalmente configura ejecución automática (Cron/Programador de tareas/LaunchAgent)
+
+**Google Drive:** Recomendado para mejor compatibilidad con apps móviles. Antes del primer sync: ejecuta `rclone config` para configurar el remote `gdrive`.
 
 ## Requisitos Previos
 
@@ -899,16 +902,17 @@ El instalador:
 
 ---
 
-## 🚀 Instalación Rápida (Recomendado para Linux)
+## 🚀 Ejecución Automática (Scripts de instalación)
 
-```bash
-cd "/pfad/zum/keepass-sync"
-./linux/install.sh
-```
+| Plataforma | Script | Qué configura |
+|------------|--------|---------------|
+| **Linux** | `./linux/install.sh` | Systemd (al apagar) + Cron (reposo cada 5 min) |
+| **Windows** | `.\windows\install.ps1` | Programador de tareas (diario a las 6:00) |
+| **macOS** | `./mac/install.sh` | LaunchAgent (al iniciar sesión + cada hora) |
 
-Este script instala automáticamente:
-- ✅ Servicio Systemd (al apagar)
-- ✅ Tarea Cron para sincronización en reposo (cada 5 minutos)
+**Linux:** `cd "/ruta/a/keepass-sync"` y `./linux/install.sh`  
+**Windows (PowerShell):** `.\windows\install.ps1`  
+**macOS:** `cd "/ruta/a/keepass-sync"` y `./mac/install.sh`
 
 ---
 

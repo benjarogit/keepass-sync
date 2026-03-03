@@ -22,16 +22,17 @@ This detailed guide explains how to install and automatically run the KeePass Sy
 For inexperienced users, there's an interactive installer:
 
 ```bash
-npm install && cp config.example.json config.json
+npm install
+npm run setup
 ```
 
 The installer:
-- ✅ Automatically detects your system
-- ✅ Shows system specifications
-- ✅ Detects your language
-- ✅ Guides you through configuration
-- ✅ Supports all protocols (FTP, SFTP, SMB, SCP)
-- ✅ Automatically creates `config.json`
+- ✅ Lets you choose protocol: FTP, SFTP, SMB, SCP, or **Google Drive (rclone, recommended)**
+- ✅ Checks dependencies (KeePassXC, rclone, smbclient, etc.)
+- ✅ Creates `config.json` from the appropriate template
+- ✅ Optionally sets up automatic execution (Cron/Task Scheduler/LaunchAgent)
+
+**Google Drive:** Recommended for best mobile app compatibility. Before first sync: run `rclone config` to set up the `gdrive` remote.
 
 ## Prerequisites
 
@@ -64,16 +65,17 @@ The installer:
 
 ---
 
-## 🚀 Quick Installation (Recommended for Linux)
+## 🚀 Automatic Execution (Install Scripts)
 
-```bash
-cd "/pfad/zum/keepass-sync"
-./linux/install.sh
-```
+| Platform | Script | What it sets up |
+|----------|--------|-----------------|
+| **Linux** | `./linux/install.sh` | Systemd (on shutdown) + Cron (idle every 5 min) |
+| **Windows** | `.\windows\install.ps1` | Task Scheduler (daily at 6:00 AM) |
+| **macOS** | `./mac/install.sh` | LaunchAgent (at login + hourly) |
 
-This script automatically installs:
-- ✅ Systemd Service (on shutdown)
-- ✅ Cron Job for idle sync (every 5 minutes)
+**Linux:** `cd "/path/to/keepass-sync"` then `./linux/install.sh`  
+**Windows (PowerShell):** `.\windows\install.ps1`  
+**macOS:** `cd "/path/to/keepass-sync"` then `./mac/install.sh`
 
 ---
 
@@ -131,15 +133,14 @@ WantedBy=shutdown.target
 
 ### Linux - Cron (Scheduled)
 
-**For daily execution at 6:00 AM:**
-```bash
-crontab -e
-```
+**Cron syntax (5 fields):** `Minute Hour Day Month Weekday` – e.g. `0 6 * * *` = daily 6:00 AM, `*/5 * * * *` = every 5 min.
 
-**Add entry:**
+**Step 1:** Run `crontab -e` – editor opens  
+**Step 2:** Add entry (adjust path!):
 ```
 0 6 * * * /usr/bin/node /path/to/keepass-sync/sync.js >> /path/to/keepass-sync/sync_cron.log 2>&1
 ```
+**Remove:** Delete the line in crontab -e, save.
 
 **For execution on idle (every 5 minutes):**
 ```bash
@@ -592,16 +593,17 @@ This detailed guide explains how to install and automatically run the KeePass Sy
 For inexperienced users, there's an interactive installer:
 
 ```bash
-npm install && cp config.example.json config.json
+npm install
+npm run setup
 ```
 
 The installer:
-- ✅ Automatically detects your system
-- ✅ Shows system specifications
-- ✅ Detects your language
-- ✅ Guides you through configuration
-- ✅ Supports all protocols (FTP, SFTP, SMB, SCP)
-- ✅ Automatically creates `config.json`
+- ✅ Lets you choose protocol: FTP, SFTP, SMB, SCP, or **Google Drive (rclone, recommended)**
+- ✅ Checks dependencies (KeePassXC, rclone, smbclient, etc.)
+- ✅ Creates `config.json` from the appropriate template
+- ✅ Optionally sets up automatic execution (Cron/Task Scheduler/LaunchAgent)
+
+**Google Drive:** Recommended for best mobile app compatibility. Before first sync: run `rclone config` to set up the `gdrive` remote.
 
 ## Prerequisites
 
@@ -634,16 +636,17 @@ The installer:
 
 ---
 
-## 🚀 Quick Installation (Recommended for Linux)
+## 🚀 Automatic Execution (Install Scripts)
 
-```bash
-cd "/pfad/zum/keepass-sync"
-./linux/install.sh
-```
+| Platform | Script | What it sets up |
+|----------|--------|-----------------|
+| **Linux** | `./linux/install.sh` | Systemd (on shutdown) + Cron (idle every 5 min) |
+| **Windows** | `.\windows\install.ps1` | Task Scheduler (daily at 6:00 AM) |
+| **macOS** | `./mac/install.sh` | LaunchAgent (at login + hourly) |
 
-This script automatically installs:
-- ✅ Systemd Service (on shutdown)
-- ✅ Cron Job for idle sync (every 5 minutes)
+**Linux:** `cd "/path/to/keepass-sync"` then `./linux/install.sh`  
+**Windows (PowerShell):** `.\windows\install.ps1`  
+**macOS:** `cd "/path/to/keepass-sync"` then `./mac/install.sh`
 
 ---
 
@@ -701,15 +704,14 @@ WantedBy=shutdown.target
 
 ### Linux - Cron (Scheduled)
 
-**For daily execution at 6:00 AM:**
-```bash
-crontab -e
-```
+**Cron syntax (5 fields):** `Minute Hour Day Month Weekday` – e.g. `0 6 * * *` = daily 6:00 AM, `*/5 * * * *` = every 5 min.
 
-**Add entry:**
+**Step 1:** Run `crontab -e` – editor opens  
+**Step 2:** Add entry (adjust path!):
 ```
 0 6 * * * /usr/bin/node /path/to/keepass-sync/sync.js >> /path/to/keepass-sync/sync_cron.log 2>&1
 ```
+**Remove:** Delete the line in crontab -e, save.
 
 **For execution on idle (every 5 minutes):**
 ```bash
