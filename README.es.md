@@ -17,7 +17,7 @@ Idiomas: [Deutsch](README.de.md) | [English](README.en.md) | [Español](README.e
 
 - Linux, Windows (incl. WSL2), macOS (x86_64)
 - **Node.js 18+** y **KeePassXC** (con `keepassxc-cli`) requeridos
-- **Recomendado:** Google Drive (rclone) para sincronización en la nube fiable y mejor compatibilidad con apps móviles – evita problemas FTP/SFTP con KeePass2Android
+- **Protocolos (orden recomendado):** 1. Google Drive (rclone), 2. SFTP (preferir sobre FTP cuando uses protocolos FTP), 3. FTP, SMB, SCP
 
 ---
 
@@ -88,22 +88,28 @@ El archivo en el servidor se mantiene actualizado; en el móvil abre la misma DB
 
 ---
 
-## Android: Añadir base de datos externa por FTP
+## Android: Añadir base de datos externa
 
-En KeePass2Android, Strongbox, etc. usa los mismos valores que en `config.json`:
+### Google Drive (recomendado)
+
+Con `type: "rclone"` abre la base de datos en KeePass2Android directamente desde **Google Drive** (soporte integrado). Elige el mismo archivo que en `remotePath`, ej. en la carpeta `KeePass/keepass_passwords.kdbx`. No hace falta configurar FTP.
+
+### FTP/SFTP
+
+En KeePass2Android, Strongbox, etc. usa los mismos valores que en `config.json`: Host, Puerto, Usuario, Contraseña, Directorio inicial. **Preferir SFTP** (cifrado; menos problemas de compatibilidad que FTP).
 
 | Campo en la app | Introducir |
 |-----------------|------------|
 | **Host** | `ftp.host` |
-| **Puerto** | `ftp.port` (21 o 22) |
+| **Puerto** | 21 (FTP) o 22 (SFTP) |
 | **Cifrado** | FTP o SFTP (`ftp.type`) |
 | **Usuario** | `ftp.user` |
 | **Contraseña** | `ftp.password` |
 | **Directorio inicial** | Parte directorio de `ftp.remotePath` |
 
-**Compatibilidad:** Usar formato KDBX 3.1 para mejor compatibilidad con KeePass2Android y `keepassxc-cli`. En KeePassXC: configuración de base de datos → guardar como KDBX 3.1 si hace falta. En KeePass2Android: cerrar/guardar correctamente la base de datos tras cambios para evitar corrupción en el sync FTP.
+**Consejo:** Si hay problemas con KeePass2Android y FTP: En KeePassXC guardar como KDBX 3.1. Con Google Drive normalmente no hace falta.
 
-Más: [KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
+[KeePassXC Getting Started](https://keepassxc.org/docs/KeePassXC_GettingStarted)
 
 ---
 
