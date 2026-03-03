@@ -1,5 +1,6 @@
 #!/bin/bash
-# KeePass Sync - Linux (calls Node.js)
+# KeePass Sync - Linux wrapper (calls node sync.js)
+# Copyright (c) 2026 Sunny C.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
