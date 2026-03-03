@@ -33,7 +33,7 @@
 
 ```bash
 npm install -g keepass-sync
-# or from source: git clone … && cd keepass-sync && npm install
+# or from source: git clone https://github.com/benjarogit/keepass-sync.git && cd keepass-sync && npm install
 ```
 
 ### 2. Configure
@@ -160,4 +160,4 @@ Version in `package.json` and Git tags (e.g. `v2.0.1`) stay in sync. npm package
 
 ---
 
-**Version:** 2.0.1 · **License:** MIT · [GitHub](https://github.com/benjarogit/keepass-sync)
+**License:** MIT · [GitHub](https://github.com/benjarogit/keepass-sync) · [npm](https://www.npmjs.com/package/keepass-sync)
