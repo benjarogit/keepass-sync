@@ -16,6 +16,7 @@ ftp_log.txt
 winscp_log.txt
 sync_idle.log
 sync_cron.log
+linux/idle_sync.sh
 
 # Backups
 backups/
