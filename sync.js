@@ -624,7 +624,8 @@ async function main() {
   checkPlatform();
 
   if (flags.version) {
-    console.log('KeePass Sync 2.0.2 (Node.js)');
+    const pkg = JSON.parse(fs.readFileSync(path.join(projectRoot, 'package.json'), 'utf8'));
+    console.log('KeePass Sync ' + pkg.version + ' (Node.js)');
     return;
   }
   if (flags.help) {
